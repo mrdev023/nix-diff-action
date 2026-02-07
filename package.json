@@ -47,14 +47,14 @@
   },
   "devDependencies": {
     "@github/local-action": "7.0.0",
-    "@types/node": "25.0.6",
-    "@typescript/native-preview": "7.0.0-dev.20260109.1",
-    "oxfmt": "0.23.0",
-    "oxlint": "1.38.0",
-    "vite": "8.0.0-beta.7",
-    "vitest": "4.0.16"
+    "@types/node": "25.2.0",
+    "@typescript/native-preview": "7.0.0-dev.20260203.1",
+    "oxfmt": "0.28.0",
+    "oxlint": "1.43.0",
+    "vite": "8.0.0-beta.12",
+    "vitest": "4.0.18"
   },
   "overrides": {
-    "vite": "8.0.0-beta.7"
+    "vite": "8.0.0-beta.12"
   }
 }
