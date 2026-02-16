@@ -1,4 +1,4 @@
-import { $ as MemoMapTypeId$1, $n as match$2, $t as succeed$1, A as catchAll$2, An as fromJson$1, At as launch$1, B as map$4, Bn as unnested$1, Bt as mock$1, C as option, Cn as spanTag, Ct as fresh$1, D as Service, Dn as constantCase$1, Dt as fromFunction$1, E as isConfigError, En as configProviderTag, Et as fromEffectDiscard, F as forEach, Fn as makeFlat$1, Ft as match$1, G as scoped$2, Gn as enable$1, Gt as provide$1, H as orElseSucceed, Hn as within$1, Ht as orElse$2, I as gen, In as mapInputPath$1, It as matchCause$1, J as tapError$2, Jn as fromNullable, Jt as scope$1, K as succeed$2, Kn as make$1, Kt as provideMerge$1, L as logError, Ln as nested$1, Lt as memoize$2, M as catchTags, Mn as kebabCase$1, Mt as makeMemoMap$1, N as fail$2, Nn as lowerCase$1, Nt as map$3, O as all, On as fromEnv$1, Ot as isFresh$1, P as flatMap$3, Pn as make$2, Pt as mapError$1, Q as LayerTypeId$1, Qn as map$5, Qt as service$1, R as logInfo, Rn as orElse$3, Rt as merge$2, S as boolean, Sn as addSpanStackTrace, St as flatten$1, T as string, Tn as FlatConfigProviderTypeId$1, Tt as fromEffectContext, U as provide$2, Un as tap$1, Ut as passthrough$1, V as mapError$2, Vn as upperCase$1, Vt as orDie$1, W as runPromise, Wn as disable$1, Wt as project$1, X as try_, Xn as isNone, Xt as scopedContext$1, Y as tryPromise, Yn as getOrElse, Yt as scoped$1, Z as CurrentMemoMap$1, Zn as isSome, Zt as scopedDiscard$1, _ as Struct, _n as withRuntimeFlagsScoped, _r as __exportAll, _t as fiberRefLocally, a as GitHubApiError, an as tapError$1, ar as getInput, at as catchAll$1, b as pattern, bn as make$3, br as __toESM, bt as fiberRefLocallyWith, c as MissingAttributesError, cn as toRuntimeWithMemoMap$1, cr as setFailed$1, ct as die$1, d as NixPathInfoError, dn as withParentSpan$1, dr as warning, dt as empty$1, en as succeedContext$1, er as none, et as annotateLogs$1, f as NotPullRequestContextError, fn as withSpan$1, fr as exec, ft as extendScope$1, g as NonEmptyString, gn as withConfigProviderScoped, gr as __esmMin, gt as failSync$1, h as Literal, hn as makeSpanScoped, hr as __commonJSMin, ht as failCauseSync$1, i as AttributeParseError, in as tap$2, ir as error, it as buildWithScope$1, j as catchIf, jn as fromMap$1, jt as locallyEffect$1, k as as, kn as fromFlat$1, kt as isLayer$1, l as NixBuildError, ln as unwrapEffect$1, lr as setOutput, lt as dieSync$1, m as Config, mn as addFinalizer, mr as require_tunnel, mt as failCause$1, nn as sync$1, nr as pipe, nt as build$1, o as InvalidCommentStrategyError, on as tapErrorCause$1, ot as catchAllCause$1, p as Array$, pn as zipWith$1, pr as require_undici, pt as fail$1, q as sync$2, qn as flatMap$2, qt as retry$3, r as ArtifactError, rn as syncContext$1, rr as debug, rt as buildWithMemoMap$1, s as InvalidDirectoryError, sn as toRuntime$1, sr as info, st as context$5, t as GitService, tn as suspend$1, tr as some$2, tt as annotateSpans$1, u as NixDixError, un as unwrapScoped$1, ur as setSecret, ut as discard$1, v as decodeUnknown, vn as withTracerScoped, vr as __require, vt as fiberRefLocallyScoped, w as redacted, wn as ConfigProviderTypeId$1, wt as fromEffect, x as value, xn as set, xt as flatMap$1, y as filter$2, yn as get, yr as __toCommonJS, yt as fiberRefLocallyScopedWith$1, z as logWarning, zn as snakeCase$1, zt as mergeAll$1 } from "./assets/git-DiMYLs6o.js";
+import { $ as MemoMapTypeId$1, $n as match$2, $t as succeed$1, A as catchAll$2, An as fromJson$1, At as launch$1, B as map$4, Bn as unnested$1, Bt as mock$1, C as option, Cn as spanTag, Cr as __toESM, Ct as fresh$1, D as Service, Dn as constantCase$1, Dt as fromFunction$1, E as isConfigError, En as configProviderTag, Et as fromEffectDiscard, F as forEach, Fn as makeFlat$1, Ft as match$1, G as scoped$2, Gn as enable$1, Gt as provide$1, H as orElseSucceed, Hn as within$1, Ht as orElse$2, I as gen, In as mapInputPath$1, It as matchCause$1, J as tapError$2, Jn as fromNullable, Jt as scope$1, K as succeed$2, Kn as make$1, Kt as provideMerge$1, L as logError, Ln as nested$1, Lt as memoize$2, M as catchTags, Mn as kebabCase$1, Mt as makeMemoMap$1, N as fail$2, Nn as lowerCase$1, Nt as map$3, O as all, On as fromEnv$1, Ot as isFresh$1, P as flatMap$3, Pn as make$2, Pt as mapError$1, Q as LayerTypeId$1, Qn as map$5, Qt as service$1, R as logInfo, Rn as orElse$3, Rt as merge$2, S as boolean, Sn as addSpanStackTrace, Sr as __toCommonJS, St as flatten$1, T as string, Tn as FlatConfigProviderTypeId$1, Tt as fromEffectContext, U as provide$2, Un as tap$1, Ut as passthrough$1, V as mapError$2, Vn as upperCase$1, Vt as orDie$1, W as runPromise, Wn as disable$1, Wt as project$1, X as try_, Xn as isNone, Xt as scopedContext$1, Y as tryPromise, Yn as getOrElse, Yt as scoped$1, Z as CurrentMemoMap$1, Zn as isSome, Zt as scopedDiscard$1, _ as Struct, _n as withRuntimeFlagsScoped, _r as require_tunnel, _t as fiberRefLocally, a as GitHubApiError, an as tapError$1, ar as getInput, at as catchAll$1, b as pattern, bn as make$3, br as __exportAll, bt as fiberRefLocallyWith, c as MissingAttributesError, cn as toRuntimeWithMemoMap$1, cr as setFailed$1, ct as die$1, d as NixPathInfoError, dn as withParentSpan$1, dr as warning, dt as empty$1, en as succeedContext$1, er as none, et as annotateLogs$1, f as NotPullRequestContextError, fn as withSpan$1, fr as exec, ft as extendScope$1, g as NonEmptyString, gn as withConfigProviderScoped, gr as require_undici, gt as failSync$1, h as Literal, hn as makeSpanScoped, hr as HttpCodes, ht as failCauseSync$1, i as AttributeParseError, in as tap$2, ir as error, it as buildWithScope$1, j as catchIf, jn as fromMap$1, jt as locallyEffect$1, k as as, kn as fromFlat$1, kt as isLayer$1, l as NixBuildError, ln as unwrapEffect$1, lr as setOutput, lt as dieSync$1, m as Config, mn as addFinalizer, mr as HttpClient, mt as failCause$1, nn as sync$1, nr as pipe, nt as build$1, o as InvalidCommentStrategyError, on as tapErrorCause$1, ot as catchAllCause$1, p as Array$, pn as zipWith$1, pr as BearerCredentialHandler, pt as fail$1, q as sync$2, qn as flatMap$2, qt as retry$3, r as ArtifactError, rn as syncContext$1, rr as debug, rt as buildWithMemoMap$1, s as InvalidDirectoryError, sn as toRuntime$1, sr as info, st as context$5, t as GitService, tn as suspend$1, tr as some$2, tt as annotateSpans$1, u as NixDixError, un as unwrapScoped$1, ur as setSecret, ut as discard$1, v as decodeUnknown, vn as withTracerScoped, vr as __commonJSMin, vt as fiberRefLocallyScoped, w as redacted, wn as ConfigProviderTypeId$1, wt as fromEffect, x as value, xn as set, xr as __require, xt as flatMap$1, y as filter$2, yn as get, yr as __esmMin, yt as fiberRefLocallyScopedWith$1, z as logWarning, zn as snakeCase$1, zt as mergeAll$1 } from "./assets/git-KIOs-7Gl.js";
 import * as os$2 from "os";
 import os, { EOL } from "os";
 import * as crypto$1 from "crypto";
@@ -6,8 +6,6 @@ import * as fs$8 from "fs";
 import { existsSync, readFileSync } from "fs";
 import * as path from "path";
 import { normalize, resolve } from "path";
-import * as http$3 from "http";
-import * as https$2 from "https";
 import { EventEmitter } from "events";
 import http from "node:http";
 import { Readable, Transform } from "node:stream";
@@ -289,8 +287,8 @@ var import_lib = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((export
 	exports.HttpClient = exports.HttpClientResponse = exports.HttpClientError = exports.MediaTypes = exports.Headers = exports.HttpCodes = void 0;
 	exports.getProxyUrl = getProxyUrl;
 	exports.isHttps = isHttps;
-	var http$4 = __importStar(__require("http"));
-	var https$3 = __importStar(__require("https"));
+	var http$3 = __importStar(__require("http"));
+	var https$2 = __importStar(__require("https"));
 	var pm = __importStar(require_proxy());
 	var tunnel = __importStar(require_tunnel());
 	var undici_1 = require_undici();
@@ -606,7 +604,7 @@ var import_lib = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((export
 			const info = {};
 			info.parsedUrl = requestUrl;
 			const usingSsl = info.parsedUrl.protocol === "https:";
-			info.httpModule = usingSsl ? https$3 : http$4;
+			info.httpModule = usingSsl ? https$2 : http$3;
 			const defaultPort = usingSsl ? 443 : 80;
 			info.options = {};
 			info.options.host = info.parsedUrl.hostname;
@@ -658,7 +656,7 @@ var import_lib = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((export
 			if (agent) return agent;
 			const usingSsl = parsedUrl.protocol === "https:";
 			let maxSockets = 100;
-			if (this.requestOptions) maxSockets = this.requestOptions.maxSockets || http$4.globalAgent.maxSockets;
+			if (this.requestOptions) maxSockets = this.requestOptions.maxSockets || http$3.globalAgent.maxSockets;
 			if (proxyUrl && proxyUrl.hostname) {
 				const agentOptions = {
 					maxSockets,
@@ -680,7 +678,7 @@ var import_lib = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((export
 					keepAlive: this._keepAlive,
 					maxSockets
 				};
-				agent = usingSsl ? new https$3.Agent(options) : new http$4.Agent(options);
+				agent = usingSsl ? new https$2.Agent(options) : new http$3.Agent(options);
 				this._agent = agent;
 			}
 			if (usingSsl && this._ignoreSslError) agent.options = Object.assign(agent.options || {}, { rejectUnauthorized: false });
@@ -757,7 +755,7 @@ var import_lib = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((export
 	var lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => (c[k.toLowerCase()] = obj[k], c), {});
 })))(), 1);
 var import_undici = require_undici();
-var __awaiter$11 = function(thisArg, _arguments, P, generator) {
+var __awaiter$9 = function(thisArg, _arguments, P, generator) {
 	function adopt(value) {
 		return value instanceof P ? value : new P(function(resolve) {
 			resolve(value);
@@ -797,7 +795,7 @@ function getProxyAgentDispatcher(destinationUrl) {
 }
 function getProxyFetch(destinationUrl) {
 	const httpDispatcher = getProxyAgentDispatcher(destinationUrl);
-	const proxyFetch = (url, opts) => __awaiter$11(this, void 0, void 0, function* () {
+	const proxyFetch = (url, opts) => __awaiter$9(this, void 0, void 0, function* () {
 		return (0, import_undici.fetch)(url, Object.assign(Object.assign({}, opts), { dispatcher: httpDispatcher }));
 	});
 	return proxyFetch;
@@ -903,7 +901,7 @@ var DEFAULTS = {
 	},
 	mediaType: { format: "" }
 };
-function lowercaseKeys$1(object) {
+function lowercaseKeys(object) {
 	if (!object) return {};
 	return Object.keys(object).reduce((newObj, key) => {
 		newObj[key.toLowerCase()] = object[key];
@@ -939,7 +937,7 @@ function merge(defaults, route, options) {
 			url
 		} : { url: method }, options);
 	} else options = Object.assign({}, route);
-	options.headers = lowercaseKeys$1(options.headers);
+	options.headers = lowercaseKeys(options.headers);
 	removeUndefinedProperties(options);
 	removeUndefinedProperties(options.headers);
 	const mergedOptions = mergeDeep(defaults || {}, options);
@@ -1188,7 +1186,7 @@ var import_fast_content_type_parse = (/* @__PURE__ */ __commonJSMin(((exports, m
 	module.exports.safeParse = safeParse;
 	module.exports.defaultContentType = defaultContentType;
 })))();
-var RequestError$1 = class extends Error {
+var RequestError = class extends Error {
 	name;
 	status;
 	request;
@@ -1247,7 +1245,7 @@ async function fetchWrapper(requestOptions) {
 				else if (typeof error.cause === "string") message = error.cause;
 			}
 		}
-		const requestError = new RequestError$1(message, 500, { request: requestOptions });
+		const requestError = new RequestError(message, 500, { request: requestOptions });
 		requestError.cause = error;
 		throw requestError;
 	}
@@ -1269,21 +1267,21 @@ async function fetchWrapper(requestOptions) {
 	if (status === 204 || status === 205) return octokitResponse;
 	if (requestOptions.method === "HEAD") {
 		if (status < 400) return octokitResponse;
-		throw new RequestError$1(fetchResponse.statusText, status, {
+		throw new RequestError(fetchResponse.statusText, status, {
 			response: octokitResponse,
 			request: requestOptions
 		});
 	}
 	if (status === 304) {
 		octokitResponse.data = await getResponseData(fetchResponse);
-		throw new RequestError$1("Not modified", status, {
+		throw new RequestError("Not modified", status, {
 			response: octokitResponse,
 			request: requestOptions
 		});
 	}
 	if (status >= 400) {
 		octokitResponse.data = await getResponseData(fetchResponse);
-		throw new RequestError$1(toErrorMessage(octokitResponse.data), status, {
+		throw new RequestError(toErrorMessage(octokitResponse.data), status, {
 			response: octokitResponse,
 			request: requestOptions
 		});
@@ -6577,575 +6575,6 @@ Invalid characters include: ${Array.from(invalidArtifactFilePathCharacters.value
 The following characters are not allowed in files that are uploaded due to limitations with certain file systems such as NTFS. To maintain file system agnostic behavior, these characters are intentionally not allowed to prevent potential problems with downloads on different file systems.
           `);
 }
-function getProxyUrl(reqUrl) {
-	const usingSsl = reqUrl.protocol === "https:";
-	if (checkBypass(reqUrl)) return;
-	const proxyVar = (() => {
-		if (usingSsl) return process.env["https_proxy"] || process.env["HTTPS_PROXY"];
-		else return process.env["http_proxy"] || process.env["HTTP_PROXY"];
-	})();
-	if (proxyVar) try {
-		return new DecodedURL(proxyVar);
-	} catch (_a) {
-		if (!proxyVar.startsWith("http://") && !proxyVar.startsWith("https://")) return new DecodedURL(`http://${proxyVar}`);
-	}
-	else return;
-}
-function checkBypass(reqUrl) {
-	if (!reqUrl.hostname) return false;
-	const reqHost = reqUrl.hostname;
-	if (isLoopbackAddress(reqHost)) return true;
-	const noProxy = process.env["no_proxy"] || process.env["NO_PROXY"] || "";
-	if (!noProxy) return false;
-	let reqPort;
-	if (reqUrl.port) reqPort = Number(reqUrl.port);
-	else if (reqUrl.protocol === "http:") reqPort = 80;
-	else if (reqUrl.protocol === "https:") reqPort = 443;
-	const upperReqHosts = [reqUrl.hostname.toUpperCase()];
-	if (typeof reqPort === "number") upperReqHosts.push(`${upperReqHosts[0]}:${reqPort}`);
-	for (const upperNoProxyItem of noProxy.split(",").map((x) => x.trim().toUpperCase()).filter((x) => x)) if (upperNoProxyItem === "*" || upperReqHosts.some((x) => x === upperNoProxyItem || x.endsWith(`.${upperNoProxyItem}`) || upperNoProxyItem.startsWith(".") && x.endsWith(`${upperNoProxyItem}`))) return true;
-	return false;
-}
-function isLoopbackAddress(host) {
-	const hostLower = host.toLowerCase();
-	return hostLower === "localhost" || hostLower.startsWith("127.") || hostLower.startsWith("[::1]") || hostLower.startsWith("[0:0:0:0:0:0:0:1]");
-}
-var DecodedURL = class extends URL {
-	constructor(url, base) {
-		super(url, base);
-		this._decodedUsername = decodeURIComponent(super.username);
-		this._decodedPassword = decodeURIComponent(super.password);
-	}
-	get username() {
-		return this._decodedUsername;
-	}
-	get password() {
-		return this._decodedPassword;
-	}
-};
-var import_tunnel = /* @__PURE__ */ __toESM(require_tunnel(), 1);
-var __awaiter$10 = function(thisArg, _arguments, P, generator) {
-	function adopt(value) {
-		return value instanceof P ? value : new P(function(resolve) {
-			resolve(value);
-		});
-	}
-	return new (P || (P = Promise))(function(resolve, reject) {
-		function fulfilled(value) {
-			try {
-				step(generator.next(value));
-			} catch (e) {
-				reject(e);
-			}
-		}
-		function rejected(value) {
-			try {
-				step(generator["throw"](value));
-			} catch (e) {
-				reject(e);
-			}
-		}
-		function step(result) {
-			result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-		}
-		step((generator = generator.apply(thisArg, _arguments || [])).next());
-	});
-};
-var HttpCodes;
-(function(HttpCodes) {
-	HttpCodes[HttpCodes["OK"] = 200] = "OK";
-	HttpCodes[HttpCodes["MultipleChoices"] = 300] = "MultipleChoices";
-	HttpCodes[HttpCodes["MovedPermanently"] = 301] = "MovedPermanently";
-	HttpCodes[HttpCodes["ResourceMoved"] = 302] = "ResourceMoved";
-	HttpCodes[HttpCodes["SeeOther"] = 303] = "SeeOther";
-	HttpCodes[HttpCodes["NotModified"] = 304] = "NotModified";
-	HttpCodes[HttpCodes["UseProxy"] = 305] = "UseProxy";
-	HttpCodes[HttpCodes["SwitchProxy"] = 306] = "SwitchProxy";
-	HttpCodes[HttpCodes["TemporaryRedirect"] = 307] = "TemporaryRedirect";
-	HttpCodes[HttpCodes["PermanentRedirect"] = 308] = "PermanentRedirect";
-	HttpCodes[HttpCodes["BadRequest"] = 400] = "BadRequest";
-	HttpCodes[HttpCodes["Unauthorized"] = 401] = "Unauthorized";
-	HttpCodes[HttpCodes["PaymentRequired"] = 402] = "PaymentRequired";
-	HttpCodes[HttpCodes["Forbidden"] = 403] = "Forbidden";
-	HttpCodes[HttpCodes["NotFound"] = 404] = "NotFound";
-	HttpCodes[HttpCodes["MethodNotAllowed"] = 405] = "MethodNotAllowed";
-	HttpCodes[HttpCodes["NotAcceptable"] = 406] = "NotAcceptable";
-	HttpCodes[HttpCodes["ProxyAuthenticationRequired"] = 407] = "ProxyAuthenticationRequired";
-	HttpCodes[HttpCodes["RequestTimeout"] = 408] = "RequestTimeout";
-	HttpCodes[HttpCodes["Conflict"] = 409] = "Conflict";
-	HttpCodes[HttpCodes["Gone"] = 410] = "Gone";
-	HttpCodes[HttpCodes["TooManyRequests"] = 429] = "TooManyRequests";
-	HttpCodes[HttpCodes["InternalServerError"] = 500] = "InternalServerError";
-	HttpCodes[HttpCodes["NotImplemented"] = 501] = "NotImplemented";
-	HttpCodes[HttpCodes["BadGateway"] = 502] = "BadGateway";
-	HttpCodes[HttpCodes["ServiceUnavailable"] = 503] = "ServiceUnavailable";
-	HttpCodes[HttpCodes["GatewayTimeout"] = 504] = "GatewayTimeout";
-})(HttpCodes || (HttpCodes = {}));
-var Headers;
-(function(Headers) {
-	Headers["Accept"] = "accept";
-	Headers["ContentType"] = "content-type";
-})(Headers || (Headers = {}));
-var MediaTypes;
-(function(MediaTypes) {
-	MediaTypes["ApplicationJson"] = "application/json";
-})(MediaTypes || (MediaTypes = {}));
-var HttpRedirectCodes = [
-	HttpCodes.MovedPermanently,
-	HttpCodes.ResourceMoved,
-	HttpCodes.SeeOther,
-	HttpCodes.TemporaryRedirect,
-	HttpCodes.PermanentRedirect
-];
-var HttpResponseRetryCodes = [
-	HttpCodes.BadGateway,
-	HttpCodes.ServiceUnavailable,
-	HttpCodes.GatewayTimeout
-];
-var RetryableHttpVerbs = [
-	"OPTIONS",
-	"GET",
-	"DELETE",
-	"HEAD"
-];
-var ExponentialBackoffCeiling = 10;
-var ExponentialBackoffTimeSlice = 5;
-var HttpClientError = class HttpClientError extends Error {
-	constructor(message, statusCode) {
-		super(message);
-		this.name = "HttpClientError";
-		this.statusCode = statusCode;
-		Object.setPrototypeOf(this, HttpClientError.prototype);
-	}
-};
-var HttpClientResponse = class {
-	constructor(message) {
-		this.message = message;
-	}
-	readBody() {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return new Promise((resolve) => __awaiter$10(this, void 0, void 0, function* () {
-				let output = Buffer.alloc(0);
-				this.message.on("data", (chunk) => {
-					output = Buffer.concat([output, chunk]);
-				});
-				this.message.on("end", () => {
-					resolve(output.toString());
-				});
-			}));
-		});
-	}
-	readBodyBuffer() {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return new Promise((resolve) => __awaiter$10(this, void 0, void 0, function* () {
-				const chunks = [];
-				this.message.on("data", (chunk) => {
-					chunks.push(chunk);
-				});
-				this.message.on("end", () => {
-					resolve(Buffer.concat(chunks));
-				});
-			}));
-		});
-	}
-};
-var HttpClient = class {
-	constructor(userAgent, handlers, requestOptions) {
-		this._ignoreSslError = false;
-		this._allowRedirects = true;
-		this._allowRedirectDowngrade = false;
-		this._maxRedirects = 50;
-		this._allowRetries = false;
-		this._maxRetries = 1;
-		this._keepAlive = false;
-		this._disposed = false;
-		this.userAgent = this._getUserAgentWithOrchestrationId(userAgent);
-		this.handlers = handlers || [];
-		this.requestOptions = requestOptions;
-		if (requestOptions) {
-			if (requestOptions.ignoreSslError != null) this._ignoreSslError = requestOptions.ignoreSslError;
-			this._socketTimeout = requestOptions.socketTimeout;
-			if (requestOptions.allowRedirects != null) this._allowRedirects = requestOptions.allowRedirects;
-			if (requestOptions.allowRedirectDowngrade != null) this._allowRedirectDowngrade = requestOptions.allowRedirectDowngrade;
-			if (requestOptions.maxRedirects != null) this._maxRedirects = Math.max(requestOptions.maxRedirects, 0);
-			if (requestOptions.keepAlive != null) this._keepAlive = requestOptions.keepAlive;
-			if (requestOptions.allowRetries != null) this._allowRetries = requestOptions.allowRetries;
-			if (requestOptions.maxRetries != null) this._maxRetries = requestOptions.maxRetries;
-		}
-	}
-	options(requestUrl, additionalHeaders) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return this.request("OPTIONS", requestUrl, null, additionalHeaders || {});
-		});
-	}
-	get(requestUrl, additionalHeaders) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return this.request("GET", requestUrl, null, additionalHeaders || {});
-		});
-	}
-	del(requestUrl, additionalHeaders) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return this.request("DELETE", requestUrl, null, additionalHeaders || {});
-		});
-	}
-	post(requestUrl, data, additionalHeaders) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return this.request("POST", requestUrl, data, additionalHeaders || {});
-		});
-	}
-	patch(requestUrl, data, additionalHeaders) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return this.request("PATCH", requestUrl, data, additionalHeaders || {});
-		});
-	}
-	put(requestUrl, data, additionalHeaders) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return this.request("PUT", requestUrl, data, additionalHeaders || {});
-		});
-	}
-	head(requestUrl, additionalHeaders) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return this.request("HEAD", requestUrl, null, additionalHeaders || {});
-		});
-	}
-	sendStream(verb, requestUrl, stream, additionalHeaders) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return this.request(verb, requestUrl, stream, additionalHeaders);
-		});
-	}
-	getJson(requestUrl_1) {
-		return __awaiter$10(this, arguments, void 0, function* (requestUrl, additionalHeaders = {}) {
-			additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-			const res = yield this.get(requestUrl, additionalHeaders);
-			return this._processResponse(res, this.requestOptions);
-		});
-	}
-	postJson(requestUrl_1, obj_1) {
-		return __awaiter$10(this, arguments, void 0, function* (requestUrl, obj, additionalHeaders = {}) {
-			const data = JSON.stringify(obj, null, 2);
-			additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-			additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultContentTypeHeader(additionalHeaders, MediaTypes.ApplicationJson);
-			const res = yield this.post(requestUrl, data, additionalHeaders);
-			return this._processResponse(res, this.requestOptions);
-		});
-	}
-	putJson(requestUrl_1, obj_1) {
-		return __awaiter$10(this, arguments, void 0, function* (requestUrl, obj, additionalHeaders = {}) {
-			const data = JSON.stringify(obj, null, 2);
-			additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-			additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultContentTypeHeader(additionalHeaders, MediaTypes.ApplicationJson);
-			const res = yield this.put(requestUrl, data, additionalHeaders);
-			return this._processResponse(res, this.requestOptions);
-		});
-	}
-	patchJson(requestUrl_1, obj_1) {
-		return __awaiter$10(this, arguments, void 0, function* (requestUrl, obj, additionalHeaders = {}) {
-			const data = JSON.stringify(obj, null, 2);
-			additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-			additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultContentTypeHeader(additionalHeaders, MediaTypes.ApplicationJson);
-			const res = yield this.patch(requestUrl, data, additionalHeaders);
-			return this._processResponse(res, this.requestOptions);
-		});
-	}
-	request(verb, requestUrl, data, headers) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			if (this._disposed) throw new Error("Client has already been disposed.");
-			const parsedUrl = new URL(requestUrl);
-			let info = this._prepareRequest(verb, parsedUrl, headers);
-			const maxTries = this._allowRetries && RetryableHttpVerbs.includes(verb) ? this._maxRetries + 1 : 1;
-			let numTries = 0;
-			let response;
-			do {
-				response = yield this.requestRaw(info, data);
-				if (response && response.message && response.message.statusCode === HttpCodes.Unauthorized) {
-					let authenticationHandler;
-					for (const handler of this.handlers) if (handler.canHandleAuthentication(response)) {
-						authenticationHandler = handler;
-						break;
-					}
-					if (authenticationHandler) return authenticationHandler.handleAuthentication(this, info, data);
-					else return response;
-				}
-				let redirectsRemaining = this._maxRedirects;
-				while (response.message.statusCode && HttpRedirectCodes.includes(response.message.statusCode) && this._allowRedirects && redirectsRemaining > 0) {
-					const redirectUrl = response.message.headers["location"];
-					if (!redirectUrl) break;
-					const parsedRedirectUrl = new URL(redirectUrl);
-					if (parsedUrl.protocol === "https:" && parsedUrl.protocol !== parsedRedirectUrl.protocol && !this._allowRedirectDowngrade) throw new Error("Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.");
-					yield response.readBody();
-					if (parsedRedirectUrl.hostname !== parsedUrl.hostname) {
-						for (const header in headers) if (header.toLowerCase() === "authorization") delete headers[header];
-					}
-					info = this._prepareRequest(verb, parsedRedirectUrl, headers);
-					response = yield this.requestRaw(info, data);
-					redirectsRemaining--;
-				}
-				if (!response.message.statusCode || !HttpResponseRetryCodes.includes(response.message.statusCode)) return response;
-				numTries += 1;
-				if (numTries < maxTries) {
-					yield response.readBody();
-					yield this._performExponentialBackoff(numTries);
-				}
-			} while (numTries < maxTries);
-			return response;
-		});
-	}
-	dispose() {
-		if (this._agent) this._agent.destroy();
-		this._disposed = true;
-	}
-	requestRaw(info, data) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return new Promise((resolve, reject) => {
-				function callbackForResult(err, res) {
-					if (err) reject(err);
-					else if (!res) reject(/* @__PURE__ */ new Error("Unknown error"));
-					else resolve(res);
-				}
-				this.requestRawWithCallback(info, data, callbackForResult);
-			});
-		});
-	}
-	requestRawWithCallback(info, data, onResult) {
-		if (typeof data === "string") {
-			if (!info.options.headers) info.options.headers = {};
-			info.options.headers["Content-Length"] = Buffer.byteLength(data, "utf8");
-		}
-		let callbackCalled = false;
-		function handleResult(err, res) {
-			if (!callbackCalled) {
-				callbackCalled = true;
-				onResult(err, res);
-			}
-		}
-		const req = info.httpModule.request(info.options, (msg) => {
-			handleResult(void 0, new HttpClientResponse(msg));
-		});
-		let socket;
-		req.on("socket", (sock) => {
-			socket = sock;
-		});
-		req.setTimeout(this._socketTimeout || 3 * 6e4, () => {
-			if (socket) socket.end();
-			handleResult(/* @__PURE__ */ new Error(`Request timeout: ${info.options.path}`));
-		});
-		req.on("error", function(err) {
-			handleResult(err);
-		});
-		if (data && typeof data === "string") req.write(data, "utf8");
-		if (data && typeof data !== "string") {
-			data.on("close", function() {
-				req.end();
-			});
-			data.pipe(req);
-		} else req.end();
-	}
-	getAgent(serverUrl) {
-		const parsedUrl = new URL(serverUrl);
-		return this._getAgent(parsedUrl);
-	}
-	getAgentDispatcher(serverUrl) {
-		const parsedUrl = new URL(serverUrl);
-		const proxyUrl = getProxyUrl(parsedUrl);
-		if (!(proxyUrl && proxyUrl.hostname)) return;
-		return this._getProxyAgentDispatcher(parsedUrl, proxyUrl);
-	}
-	_prepareRequest(method, requestUrl, headers) {
-		const info = {};
-		info.parsedUrl = requestUrl;
-		const usingSsl = info.parsedUrl.protocol === "https:";
-		info.httpModule = usingSsl ? https$2 : http$3;
-		const defaultPort = usingSsl ? 443 : 80;
-		info.options = {};
-		info.options.host = info.parsedUrl.hostname;
-		info.options.port = info.parsedUrl.port ? parseInt(info.parsedUrl.port) : defaultPort;
-		info.options.path = (info.parsedUrl.pathname || "") + (info.parsedUrl.search || "");
-		info.options.method = method;
-		info.options.headers = this._mergeHeaders(headers);
-		if (this.userAgent != null) info.options.headers["user-agent"] = this.userAgent;
-		info.options.agent = this._getAgent(info.parsedUrl);
-		if (this.handlers) for (const handler of this.handlers) handler.prepareRequest(info.options);
-		return info;
-	}
-	_mergeHeaders(headers) {
-		if (this.requestOptions && this.requestOptions.headers) return Object.assign({}, lowercaseKeys(this.requestOptions.headers), lowercaseKeys(headers || {}));
-		return lowercaseKeys(headers || {});
-	}
-	_getExistingOrDefaultHeader(additionalHeaders, header, _default) {
-		let clientHeader;
-		if (this.requestOptions && this.requestOptions.headers) {
-			const headerValue = lowercaseKeys(this.requestOptions.headers)[header];
-			if (headerValue) clientHeader = typeof headerValue === "number" ? headerValue.toString() : headerValue;
-		}
-		const additionalValue = additionalHeaders[header];
-		if (additionalValue !== void 0) return typeof additionalValue === "number" ? additionalValue.toString() : additionalValue;
-		if (clientHeader !== void 0) return clientHeader;
-		return _default;
-	}
-	_getExistingOrDefaultContentTypeHeader(additionalHeaders, _default) {
-		let clientHeader;
-		if (this.requestOptions && this.requestOptions.headers) {
-			const headerValue = lowercaseKeys(this.requestOptions.headers)[Headers.ContentType];
-			if (headerValue) if (typeof headerValue === "number") clientHeader = String(headerValue);
-			else if (Array.isArray(headerValue)) clientHeader = headerValue.join(", ");
-			else clientHeader = headerValue;
-		}
-		const additionalValue = additionalHeaders[Headers.ContentType];
-		if (additionalValue !== void 0) if (typeof additionalValue === "number") return String(additionalValue);
-		else if (Array.isArray(additionalValue)) return additionalValue.join(", ");
-		else return additionalValue;
-		if (clientHeader !== void 0) return clientHeader;
-		return _default;
-	}
-	_getAgent(parsedUrl) {
-		let agent;
-		const proxyUrl = getProxyUrl(parsedUrl);
-		const useProxy = proxyUrl && proxyUrl.hostname;
-		if (this._keepAlive && useProxy) agent = this._proxyAgent;
-		if (!useProxy) agent = this._agent;
-		if (agent) return agent;
-		const usingSsl = parsedUrl.protocol === "https:";
-		let maxSockets = 100;
-		if (this.requestOptions) maxSockets = this.requestOptions.maxSockets || http$3.globalAgent.maxSockets;
-		if (proxyUrl && proxyUrl.hostname) {
-			const agentOptions = {
-				maxSockets,
-				keepAlive: this._keepAlive,
-				proxy: Object.assign(Object.assign({}, (proxyUrl.username || proxyUrl.password) && { proxyAuth: `${proxyUrl.username}:${proxyUrl.password}` }), {
-					host: proxyUrl.hostname,
-					port: proxyUrl.port
-				})
-			};
-			let tunnelAgent;
-			const overHttps = proxyUrl.protocol === "https:";
-			if (usingSsl) tunnelAgent = overHttps ? import_tunnel.httpsOverHttps : import_tunnel.httpsOverHttp;
-			else tunnelAgent = overHttps ? import_tunnel.httpOverHttps : import_tunnel.httpOverHttp;
-			agent = tunnelAgent(agentOptions);
-			this._proxyAgent = agent;
-		}
-		if (!agent) {
-			const options = {
-				keepAlive: this._keepAlive,
-				maxSockets
-			};
-			agent = usingSsl ? new https$2.Agent(options) : new http$3.Agent(options);
-			this._agent = agent;
-		}
-		if (usingSsl && this._ignoreSslError) agent.options = Object.assign(agent.options || {}, { rejectUnauthorized: false });
-		return agent;
-	}
-	_getProxyAgentDispatcher(parsedUrl, proxyUrl) {
-		let proxyAgent;
-		if (this._keepAlive) proxyAgent = this._proxyAgentDispatcher;
-		if (proxyAgent) return proxyAgent;
-		const usingSsl = parsedUrl.protocol === "https:";
-		proxyAgent = new import_undici.ProxyAgent(Object.assign({
-			uri: proxyUrl.href,
-			pipelining: !this._keepAlive ? 0 : 1
-		}, (proxyUrl.username || proxyUrl.password) && { token: `Basic ${Buffer.from(`${proxyUrl.username}:${proxyUrl.password}`).toString("base64")}` }));
-		this._proxyAgentDispatcher = proxyAgent;
-		if (usingSsl && this._ignoreSslError) proxyAgent.options = Object.assign(proxyAgent.options.requestTls || {}, { rejectUnauthorized: false });
-		return proxyAgent;
-	}
-	_getUserAgentWithOrchestrationId(userAgent) {
-		const baseUserAgent = userAgent || "actions/http-client";
-		const orchId = process.env["ACTIONS_ORCHESTRATION_ID"];
-		if (orchId) return `${baseUserAgent} actions_orchestration_id/${orchId.replace(/[^a-z0-9_.-]/gi, "_")}`;
-		return baseUserAgent;
-	}
-	_performExponentialBackoff(retryNumber) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
-			const ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
-			return new Promise((resolve) => setTimeout(() => resolve(), ms));
-		});
-	}
-	_processResponse(res, options) {
-		return __awaiter$10(this, void 0, void 0, function* () {
-			return new Promise((resolve, reject) => __awaiter$10(this, void 0, void 0, function* () {
-				const statusCode = res.message.statusCode || 0;
-				const response = {
-					statusCode,
-					result: null,
-					headers: {}
-				};
-				if (statusCode === HttpCodes.NotFound) resolve(response);
-				function dateTimeDeserializer(key, value) {
-					if (typeof value === "string") {
-						const a = new Date(value);
-						if (!isNaN(a.valueOf())) return a;
-					}
-					return value;
-				}
-				let obj;
-				let contents;
-				try {
-					contents = yield res.readBody();
-					if (contents && contents.length > 0) {
-						if (options && options.deserializeDates) obj = JSON.parse(contents, dateTimeDeserializer);
-						else obj = JSON.parse(contents);
-						response.result = obj;
-					}
-					response.headers = res.message.headers;
-				} catch (err) {}
-				if (statusCode > 299) {
-					let msg;
-					if (obj && obj.message) msg = obj.message;
-					else if (contents && contents.length > 0) msg = contents;
-					else msg = `Failed request: (${statusCode})`;
-					const err = new HttpClientError(msg, statusCode);
-					err.result = response.result;
-					reject(err);
-				} else resolve(response);
-			}));
-		});
-	}
-};
-var lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => (c[k.toLowerCase()] = obj[k], c), {});
-var __awaiter$9 = function(thisArg, _arguments, P, generator) {
-	function adopt(value) {
-		return value instanceof P ? value : new P(function(resolve) {
-			resolve(value);
-		});
-	}
-	return new (P || (P = Promise))(function(resolve, reject) {
-		function fulfilled(value) {
-			try {
-				step(generator.next(value));
-			} catch (e) {
-				reject(e);
-			}
-		}
-		function rejected(value) {
-			try {
-				step(generator["throw"](value));
-			} catch (e) {
-				reject(e);
-			}
-		}
-		function step(result) {
-			result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-		}
-		step((generator = generator.apply(thisArg, _arguments || [])).next());
-	});
-};
-var BearerCredentialHandler = class {
-	constructor(token) {
-		this.token = token;
-	}
-	prepareRequest(options) {
-		if (!options.headers) throw Error("The request has no headers");
-		options.headers["Authorization"] = `Bearer ${this.token}`;
-	}
-	canHandleAuthentication() {
-		return false;
-	}
-	handleAuthentication() {
-		return __awaiter$9(this, void 0, void 0, function* () {
-			throw new Error("not implemented");
-		});
-	}
-};
 var package_exports = /* @__PURE__ */ __exportAll({
 	bugs: () => bugs,
 	default: () => package_default,
@@ -12293,8 +11722,31 @@ const defaultOptions$1 = {
 	},
 	captureMetaData: false
 };
+function normalizeProcessEntities(value) {
+	if (typeof value === "boolean") return {
+		enabled: value,
+		maxEntitySize: 1e4,
+		maxExpansionDepth: 10,
+		maxTotalExpansions: 1e3,
+		maxExpandedLength: 1e5,
+		allowedTags: null,
+		tagFilter: null
+	};
+	if (typeof value === "object" && value !== null) return {
+		enabled: value.enabled !== false,
+		maxEntitySize: value.maxEntitySize ?? 1e4,
+		maxExpansionDepth: value.maxExpansionDepth ?? 10,
+		maxTotalExpansions: value.maxTotalExpansions ?? 1e3,
+		maxExpandedLength: value.maxExpandedLength ?? 1e5,
+		allowedTags: value.allowedTags ?? null,
+		tagFilter: value.tagFilter ?? null
+	};
+	return normalizeProcessEntities(true);
+}
 const buildOptions = function(options) {
-	return Object.assign({}, defaultOptions$1, options);
+	const built = Object.assign({}, defaultOptions$1, options);
+	built.processEntities = normalizeProcessEntities(built.processEntities);
+	return built;
 };
 var METADATA_SYMBOL$1;
 if (typeof Symbol !== "function") METADATA_SYMBOL$1 = "@@xmlMetadata";
@@ -12323,8 +11775,9 @@ var XmlNode = class {
 	}
 };
 var DocTypeReader = class {
-	constructor(processEntities) {
-		this.suppressValidationErr = !processEntities;
+	constructor(options) {
+		this.suppressValidationErr = !options;
+		this.options = options;
 	}
 	readDocType(xmlData, i) {
 		const entities = {};
@@ -12338,10 +11791,13 @@ var DocTypeReader = class {
 					i += 7;
 					let entityName, val;
 					[entityName, val, i] = this.readEntityExp(xmlData, i + 1, this.suppressValidationErr);
-					if (val.indexOf("&") === -1) entities[entityName] = {
-						regx: RegExp(`&${entityName};`, "g"),
-						val
-					};
+					if (val.indexOf("&") === -1) {
+						const escaped = entityName.replace(/[.\-+*:]/g, "\\.");
+						entities[entityName] = {
+							regx: RegExp(`&${escaped};`, "g"),
+							val
+						};
+					}
 				} else if (hasBody && hasSeq(xmlData, "!ELEMENT", i)) {
 					i += 8;
 					const { index } = this.readElementExp(xmlData, i + 1);
@@ -12387,6 +11843,7 @@ var DocTypeReader = class {
 		}
 		let entityValue = "";
 		[i, entityValue] = this.readIdentifierVal(xmlData, i, "entity");
+		if (this.options.enabled !== false && this.options.maxEntitySize && entityValue.length > this.options.maxEntitySize) throw new Error(`Entity "${entityName}" size (${entityValue.length}) exceeds maximum allowed size (${this.options.maxEntitySize})`);
 		i--;
 		return [
 			entityName,
@@ -12697,11 +12154,11 @@ var OrderedObjParser = class {
 			},
 			"num_dec": {
 				regex: /&#([0-9]{1,7});/g,
-				val: (_, str) => String.fromCodePoint(Number.parseInt(str, 10))
+				val: (_, str) => fromCodePoint(str, 10, "&#")
 			},
 			"num_hex": {
 				regex: /&#x([0-9a-fA-F]{1,6});/g,
-				val: (_, str) => String.fromCodePoint(Number.parseInt(str, 16))
+				val: (_, str) => fromCodePoint(str, 16, "&#x")
 			}
 		};
 		this.addExternalEntities = addExternalEntities;
@@ -12715,6 +12172,8 @@ var OrderedObjParser = class {
 		this.saveTextToParentTag = saveTextToParentTag;
 		this.addChild = addChild;
 		this.ignoreAttributesFn = getIgnoreAttributesFn(this.options.ignoreAttributes);
+		this.entityExpansionCount = 0;
+		this.currentExpandedLength = 0;
 		if (this.options.stopNodes && this.options.stopNodes.length > 0) {
 			this.stopNodesExact = /* @__PURE__ */ new Set();
 			this.stopNodesWildcard = /* @__PURE__ */ new Set();
@@ -12731,8 +12190,9 @@ function addExternalEntities(externalEntities) {
 	const entKeys = Object.keys(externalEntities);
 	for (let i = 0; i < entKeys.length; i++) {
 		const ent = entKeys[i];
+		const escaped = ent.replace(/[.\-+*:]/g, "\\.");
 		this.lastEntities[ent] = {
-			regex: new RegExp("&" + ent + ";", "g"),
+			regex: new RegExp("&" + escaped + ";", "g"),
 			val: externalEntities[ent]
 		};
 	}
@@ -12741,7 +12201,7 @@ function parseTextData(val, tagName, jPath, dontTrim, hasAttributes, isLeafNode,
 	if (val !== void 0) {
 		if (this.options.trimValues && !dontTrim) val = val.trim();
 		if (val.length > 0) {
-			if (!escapeEntities) val = this.replaceEntitiesValue(val);
+			if (!escapeEntities) val = this.replaceEntitiesValue(val, tagName, jPath);
 			const newval = this.options.tagValueProcessor(tagName, val, jPath, hasAttributes, isLeafNode);
 			if (newval === null || newval === void 0) return val;
 			else if (typeof newval !== typeof val || newval !== val) return newval;
@@ -12761,7 +12221,7 @@ function resolveNameSpace(tagname) {
 	return tagname;
 }
 var attrsRegx = /* @__PURE__ */ new RegExp("([^\\s=]+)\\s*(=\\s*(['\"])([\\s\\S]*?)\\3)?", "gm");
-function buildAttributesMap(attrStr, jPath) {
+function buildAttributesMap(attrStr, jPath, tagName) {
 	if (this.options.ignoreAttributes !== true && typeof attrStr === "string") {
 		const matches = getAllMatches(attrStr, attrsRegx);
 		const len = matches.length;
@@ -12776,7 +12236,7 @@ function buildAttributesMap(attrStr, jPath) {
 				if (aName === "__proto__") aName = "#__proto__";
 				if (oldVal !== void 0) {
 					if (this.options.trimValues) oldVal = oldVal.trim();
-					oldVal = this.replaceEntitiesValue(oldVal);
+					oldVal = this.replaceEntitiesValue(oldVal, tagName, jPath);
 					const newVal = this.options.attributeValueProcessor(attrName, oldVal, jPath);
 					if (newVal === null || newVal === void 0) attrs[aName] = oldVal;
 					else if (typeof newVal !== typeof oldVal || newVal !== oldVal) attrs[aName] = newVal;
@@ -12799,6 +12259,8 @@ var parseXml = function(xmlData) {
 	let currentNode = xmlObj;
 	let textData = "";
 	let jPath = "";
+	this.entityExpansionCount = 0;
+	this.currentExpandedLength = 0;
 	const docTypeReader = new DocTypeReader(this.options.processEntities);
 	for (let i = 0; i < xmlData.length; i++) if (xmlData[i] === "<") if (xmlData[i + 1] === "/") {
 		const closeIndex = findClosingIndex(xmlData, ">", i, "Closing Tag is not closed.");
@@ -12827,7 +12289,7 @@ var parseXml = function(xmlData) {
 		if (this.options.ignoreDeclaration && tagData.tagName === "?xml" || this.options.ignorePiTags) {} else {
 			const childNode = new XmlNode(tagData.tagName);
 			childNode.add(this.options.textNodeName, "");
-			if (tagData.tagName !== tagData.tagExp && tagData.attrExpPresent) childNode[":@"] = this.buildAttributesMap(tagData.tagExp, jPath);
+			if (tagData.tagName !== tagData.tagExp && tagData.attrExpPresent) childNode[":@"] = this.buildAttributesMap(tagData.tagExp, jPath, tagData.tagName);
 			this.addChild(currentNode, childNode, jPath, i);
 		}
 		i = tagData.closeIndex + 1;
@@ -12891,7 +12353,7 @@ var parseXml = function(xmlData) {
 				tagContent = result.tagContent;
 			}
 			const childNode = new XmlNode(tagName);
-			if (tagName !== tagExp && attrExpPresent) childNode[":@"] = this.buildAttributesMap(tagExp, jPath);
+			if (tagName !== tagExp && attrExpPresent) childNode[":@"] = this.buildAttributesMap(tagExp, jPath, tagName);
 			if (tagContent) tagContent = this.parseTextData(tagContent, tagName, jPath, true, attrExpPresent, true, true);
 			jPath = jPath.substr(0, jPath.lastIndexOf("."));
 			childNode.add(this.options.textNodeName, tagContent);
@@ -12909,13 +12371,13 @@ var parseXml = function(xmlData) {
 					tagName = newTagName;
 				}
 				const childNode = new XmlNode(tagName);
-				if (tagName !== tagExp && attrExpPresent) childNode[":@"] = this.buildAttributesMap(tagExp, jPath);
+				if (tagName !== tagExp && attrExpPresent) childNode[":@"] = this.buildAttributesMap(tagExp, jPath, tagName);
 				this.addChild(currentNode, childNode, jPath, startIndex);
 				jPath = jPath.substr(0, jPath.lastIndexOf("."));
 			} else {
 				const childNode = new XmlNode(tagName);
 				this.tagsNodeStack.push(currentNode);
-				if (tagName !== tagExp && attrExpPresent) childNode[":@"] = this.buildAttributesMap(tagExp, jPath);
+				if (tagName !== tagExp && attrExpPresent) childNode[":@"] = this.buildAttributesMap(tagExp, jPath, tagName);
 				this.addChild(currentNode, childNode, jPath, startIndex);
 				currentNode = childNode;
 			}
@@ -12934,22 +12396,41 @@ function addChild(currentNode, childNode, jPath, startIndex) {
 		currentNode.addChild(childNode, startIndex);
 	} else currentNode.addChild(childNode, startIndex);
 }
-var replaceEntitiesValue$1 = function(val) {
-	if (this.options.processEntities) {
-		for (let entityName in this.docTypeEntities) {
-			const entity = this.docTypeEntities[entityName];
-			val = val.replace(entity.regx, entity.val);
-		}
-		for (let entityName in this.lastEntities) {
-			const entity = this.lastEntities[entityName];
-			val = val.replace(entity.regex, entity.val);
-		}
-		if (this.options.htmlEntities) for (let entityName in this.htmlEntities) {
-			const entity = this.htmlEntities[entityName];
-			val = val.replace(entity.regex, entity.val);
-		}
-		val = val.replace(this.ampEntity.regex, this.ampEntity.val);
+var replaceEntitiesValue$1 = function(val, tagName, jPath) {
+	if (val.indexOf("&") === -1) return val;
+	const entityConfig = this.options.processEntities;
+	if (!entityConfig.enabled) return val;
+	if (entityConfig.allowedTags) {
+		if (!entityConfig.allowedTags.includes(tagName)) return val;
 	}
+	if (entityConfig.tagFilter) {
+		if (!entityConfig.tagFilter(tagName, jPath)) return val;
+	}
+	for (let entityName in this.docTypeEntities) {
+		const entity = this.docTypeEntities[entityName];
+		const matches = val.match(entity.regx);
+		if (matches) {
+			this.entityExpansionCount += matches.length;
+			if (entityConfig.maxTotalExpansions && this.entityExpansionCount > entityConfig.maxTotalExpansions) throw new Error(`Entity expansion limit exceeded: ${this.entityExpansionCount} > ${entityConfig.maxTotalExpansions}`);
+			const lengthBefore = val.length;
+			val = val.replace(entity.regx, entity.val);
+			if (entityConfig.maxExpandedLength) {
+				this.currentExpandedLength += val.length - lengthBefore;
+				if (this.currentExpandedLength > entityConfig.maxExpandedLength) throw new Error(`Total expanded content size exceeded: ${this.currentExpandedLength} > ${entityConfig.maxExpandedLength}`);
+			}
+		}
+	}
+	if (val.indexOf("&") === -1) return val;
+	for (let entityName in this.lastEntities) {
+		const entity = this.lastEntities[entityName];
+		val = val.replace(entity.regex, entity.val);
+	}
+	if (val.indexOf("&") === -1) return val;
+	if (this.options.htmlEntities) for (let entityName in this.htmlEntities) {
+		const entity = this.htmlEntities[entityName];
+		val = val.replace(entity.regex, entity.val);
+	}
+	val = val.replace(this.ampEntity.regex, this.ampEntity.val);
 	return val;
 };
 function saveTextToParentTag(textData, currentNode, jPath, isLeafNode) {
@@ -13052,6 +12533,11 @@ function parseValue(val, shouldParse, options) {
 		else return toNumber(val, options);
 	} else if (isExist(val)) return val;
 	else return "";
+}
+function fromCodePoint(str, base, prefix) {
+	const codePoint = Number.parseInt(str, base);
+	if (codePoint >= 0 && codePoint <= 1114111) return String.fromCodePoint(codePoint);
+	else return prefix + str + ";";
 }
 var METADATA_SYMBOL = XmlNode.getMetaDataSymbol();
 function prettify(node, options) {
@@ -14712,7 +14198,7 @@ var UserDelegationKeyCredential = class {
 		return createHmac("sha256", this.key).update(stringToSign, "utf8").digest("base64");
 	}
 };
-const SDK_VERSION = "12.30.0";
+const SDK_VERSION = "12.31.0";
 const SERVICE_VERSION = "2026-02-06";
 const BLOCK_BLOB_MAX_UPLOAD_BLOB_BYTES = 256 * 1024 * 1024;
 const BLOCK_BLOB_MAX_STAGE_BLOCK_BYTES = 4e3 * 1024 * 1024;
@@ -47202,8 +46688,10 @@ var require_utf8_decoder = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			for (let i = 0, n = data.byteLength; i < n; i++) {
 				const byte = data[i];
 				if (this.bytesNeeded === 0) {
-					if (byte <= 127) result += String.fromCharCode(byte);
-					else {
+					if (byte <= 127) {
+						this.bytesSeen = 0;
+						result += String.fromCharCode(byte);
+					} else {
 						this.bytesSeen = 1;
 						if (byte >= 194 && byte <= 223) {
 							this.bytesNeeded = 2;
@@ -47229,6 +46717,7 @@ var require_utf8_decoder = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 					this.lowerBoundary = 128;
 					this.upperBoundary = 191;
 					result += "�";
+					i--;
 					continue;
 				}
 				this.lowerBoundary = 128;
@@ -52626,24 +52115,6 @@ var import_light = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((expo
 		return Bottleneck_1;
 	}));
 })))(), 1);
-var RequestError = class extends Error {
-	name;
-	status;
-	request;
-	response;
-	constructor(message, statusCode, options) {
-		super(message, { cause: options.cause });
-		this.name = "HttpError";
-		this.status = Number.parseInt(statusCode);
-		if (Number.isNaN(this.status)) this.status = 0;
-		/* v8 ignore else -- @preserve -- Bug with vitest coverage where it sees an else branch that doesn't exist */
-		if ("response" in options) this.response = options.response;
-		const requestCopy = Object.assign({}, options.request);
-		if (options.request.headers.authorization) requestCopy.headers = Object.assign({}, options.request.headers, { authorization: options.request.headers.authorization.replace(/(?<! ) .*$/, " [REDACTED]") });
-		requestCopy.url = requestCopy.url.replace(/\bclient_secret=\w+/g, "client_secret=[REDACTED]").replace(/\baccess_token=\w+/g, "access_token=[REDACTED]");
-		this.request = requestCopy;
-	}
-};
 var VERSION = "0.0.0-development";
 async function errorRequest(state, octokit, error, options) {
 	if (!error.request || !error.request.request) throw error;
