@@ -18266,7 +18266,7 @@ const OP_WITH_RUNTIME = "WithRuntime";
 const OP_YIELD = "Yield";
 /** @internal */
 const OP_REVERT_FLAGS = "RevertFlags";
-var moduleVersion = "3.19.18";
+var moduleVersion = "3.19.19";
 const getCurrentVersion = () => moduleVersion;
 /** @internal */
 const EffectTypeId$3 = /* @__PURE__ */ Symbol.for("effect/Effect");
@@ -30424,6 +30424,10 @@ var FiberRuntime = class extends Class$3 {
 	get await() {
 		return async_((resume) => {
 			const cb = (exit) => resume(succeed$12(exit));
+			if (this._exitValue !== null) {
+				cb(this._exitValue);
+				return;
+			}
 			this.tell(stateful((fiber, _) => {
 				if (fiber._exitValue !== null) cb(this._exitValue);
 				else fiber.addObserver(cb);
@@ -31774,16 +31778,22 @@ var Semaphore = class {
 			const observer = () => {
 				if (this.free < n) return;
 				this.waiters.delete(observer);
-				this.taken += n;
-				resume(succeed$12(n));
+				resume(suspend$5(() => {
+					if (this.free < n) return this.take(n);
+					this.taken += n;
+					return succeed$12(n);
+				}));
 			};
 			this.waiters.add(observer);
 			return sync$6(() => {
 				this.waiters.delete(observer);
 			});
 		}
-		this.taken += n;
-		return resume(succeed$12(n));
+		resume(suspend$5(() => {
+			if (this.free < n) return this.take(n);
+			this.taken += n;
+			return succeed$12(n);
+		}));
 	});
 	updateTakenUnsafe(fiber, f) {
 		this.taken = f(this.taken);
@@ -36496,4 +36506,4 @@ var GitService = class extends Service()("GitService", { succeed: { createWorktr
 } } }) {};
 export { MemoMapTypeId as $, match$13 as $n, succeed$5 as $t, catchAll as A, fromJson as An, launch as At, map$3 as B, unnested as Bn, mock as Bt, option as C, spanTag as Cn, __toESM as Cr, fresh as Ct, Service as D, constantCase as Dn, fromFunction as Dt, isConfigError as E, configProviderTag as En, fromEffectDiscard as Et, forEach as F, makeFlat as Fn, match$1 as Ft, scoped as G, enable$2 as Gn, provide$1 as Gt, orElseSucceed as H, within as Hn, orElse$4 as Ht, gen as I, mapInputPath as In, matchCause$1 as It, tapError as J, fromNullable$2 as Jn, scope$1 as Jt, succeed$3 as K, make$43 as Kn, provideMerge as Kt, logError as L, nested$2 as Ln, memoize as Lt, catchTags as M, kebabCase as Mn, makeMemoMap as Mt, fail$3 as N, lowerCase as Nn, map$5 as Nt, all$2 as O, fromEnv as On, isFresh as Ot, flatMap$1 as P, make$25 as Pn, mapError$2 as Pt, LayerTypeId as Q, map$19 as Qn, service as Qt, logInfo as R, orElse$7 as Rn, merge$1 as Rt, boolean as S, addSpanStackTrace as Sn, __toCommonJS as Sr, flatten$1 as St, string as T, FlatConfigProviderTypeId as Tn, fromEffectContext as Tt, provide as U, tap$2 as Un, passthrough$1 as Ut, mapError$1 as V, upperCase as Vn, orDie$1 as Vt, runPromise as W, disable$2 as Wn, project as Wt, try_ as X, isNone$2 as Xn, scopedContext as Xt, tryPromise as Y, getOrElse$5 as Yn, scoped$1 as Yt, CurrentMemoMap as Z, isSome as Zn, scopedDiscard as Zt, Struct as _, withRuntimeFlagsScoped as _n, require_tunnel as _r, fiberRefLocally as _t, GitHubApiError as a, tapError$1 as an, getInput as ar, catchAll$1 as at, pattern as b, make$18 as bn, __exportAll as br, fiberRefLocallyWith as bt, MissingAttributesError as c, toRuntimeWithMemoMap as cn, setFailed as cr, die$1 as ct, NixPathInfoError as d, withParentSpan$1 as dn, warning as dr, empty as dt, succeedContext as en, none$7 as er, annotateLogs$1 as et, NotPullRequestContextError as f, withSpan$1 as fn, exec as fr, extendScope as ft, NonEmptyString as g, withConfigProviderScoped$1 as gn, require_undici as gr, failSync$1 as gt, Literal as h, makeSpanScoped$1 as hn, HttpCodes as hr, failCauseSync$1 as ht, AttributeParseError as i, tap$1 as in, error as ir, buildWithScope as it, catchIf as j, fromMap as jn, locallyEffect as jt, as as k, fromFlat as kn, isLayer as kt, NixBuildError as l, unwrapEffect as ln, setOutput as lr, dieSync$1 as lt, Config as m, addFinalizer$2 as mn, HttpClient as mr, failCause$2 as mt, removeWorktree as n, sync$3 as nn, pipe as nr, build as nt, InvalidCommentStrategyError as o, tapErrorCause$1 as on, getState as or, catchAllCause$1 as ot, Array$ as p, zipWith$3 as pn, BearerCredentialHandler as pr, fail$5 as pt, sync$2 as q, flatMap$13 as qn, retry$1 as qt, ArtifactError as r, syncContext as rn, debug as rr, buildWithMemoMap as rt, InvalidDirectoryError as s, toRuntime as sn, info as sr, context$1 as st, GitService as t, suspend$3 as tn, some$4 as tr, annotateSpans$1 as tt, NixDixError as u, unwrapScoped as un, setSecret as ur, discard as ut, decodeUnknown as v, withTracerScoped$1 as vn, __commonJSMin as vr, fiberRefLocallyScoped as vt, redacted as w, ConfigProviderTypeId as wn, fromEffect as wt, value as x, set as xn, __require as xr, flatMap$2 as xt, filter as y, get as yn, __esmMin as yr, fiberRefLocallyScopedWith as yt, logWarning as z, snakeCase as zn, mergeAll$1 as zt };
 
-//# sourceMappingURL=git-Bs7vmWTB.js.map
+//# sourceMappingURL=git-DtFRI9bQ.js.map
