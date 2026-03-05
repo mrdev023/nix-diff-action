@@ -4,7 +4,7 @@ import os, { EOL } from "os";
 import * as crypto$1 from "crypto";
 import * as fs$8 from "fs";
 import { existsSync, readFileSync } from "fs";
-import * as path from "path";
+import * as path$2 from "path";
 import { normalize, resolve } from "path";
 import { EventEmitter } from "events";
 import http from "node:http";
@@ -849,7 +849,7 @@ var import_lib = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((export
 	var lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => (c[k.toLowerCase()] = obj[k], c), {});
 })))(), 1);
 var import_undici = require_undici();
-var __awaiter$9 = function(thisArg, _arguments, P, generator) {
+var __awaiter$10 = function(thisArg, _arguments, P, generator) {
 	function adopt(value) {
 		return value instanceof P ? value : new P(function(resolve) {
 			resolve(value);
@@ -889,7 +889,7 @@ function getProxyAgentDispatcher(destinationUrl) {
 }
 function getProxyFetch(destinationUrl) {
 	const httpDispatcher = getProxyAgentDispatcher(destinationUrl);
-	const proxyFetch = (url, opts) => __awaiter$9(this, void 0, void 0, function* () {
+	const proxyFetch = (url, opts) => __awaiter$10(this, void 0, void 0, function* () {
 		return (0, import_undici.fetch)(url, Object.assign(Object.assign({}, opts), { dispatcher: httpDispatcher }));
 	});
 	return proxyFetch;
@@ -6309,265 +6309,6 @@ var ServiceType = class {
 		this.options = options !== null && options !== void 0 ? options : {};
 	}
 };
-var MigrateArtifactRequest$Type = class extends MessageType {
-	constructor() {
-		super("github.actions.results.api.v1.MigrateArtifactRequest", [
-			{
-				no: 1,
-				name: "workflow_run_backend_id",
-				kind: "scalar",
-				T: 9
-			},
-			{
-				no: 2,
-				name: "name",
-				kind: "scalar",
-				T: 9
-			},
-			{
-				no: 3,
-				name: "expires_at",
-				kind: "message",
-				T: () => Timestamp
-			}
-		]);
-	}
-	create(value) {
-		const message = {
-			workflowRunBackendId: "",
-			name: ""
-		};
-		globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
-			enumerable: false,
-			value: this
-		});
-		if (value !== void 0) reflectionMergePartial(this, message, value);
-		return message;
-	}
-	internalBinaryRead(reader, length, options, target) {
-		let message = target !== null && target !== void 0 ? target : this.create(), end = reader.pos + length;
-		while (reader.pos < end) {
-			let [fieldNo, wireType] = reader.tag();
-			switch (fieldNo) {
-				case 1:
-					message.workflowRunBackendId = reader.string();
-					break;
-				case 2:
-					message.name = reader.string();
-					break;
-				case 3:
-					message.expiresAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.expiresAt);
-					break;
-				default:
-					let u = options.readUnknownField;
-					if (u === "throw") throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-					let d = reader.skip(wireType);
-					if (u !== false) (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-			}
-		}
-		return message;
-	}
-	internalBinaryWrite(message, writer, options) {
-		if (message.workflowRunBackendId !== "") writer.tag(1, WireType.LengthDelimited).string(message.workflowRunBackendId);
-		if (message.name !== "") writer.tag(2, WireType.LengthDelimited).string(message.name);
-		if (message.expiresAt) Timestamp.internalBinaryWrite(message.expiresAt, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-		let u = options.writeUnknownFields;
-		if (u !== false) (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-		return writer;
-	}
-};
-/**
-* @generated MessageType for protobuf message github.actions.results.api.v1.MigrateArtifactRequest
-*/
-const MigrateArtifactRequest = new MigrateArtifactRequest$Type();
-var MigrateArtifactResponse$Type = class extends MessageType {
-	constructor() {
-		super("github.actions.results.api.v1.MigrateArtifactResponse", [{
-			no: 1,
-			name: "ok",
-			kind: "scalar",
-			T: 8
-		}, {
-			no: 2,
-			name: "signed_upload_url",
-			kind: "scalar",
-			T: 9
-		}]);
-	}
-	create(value) {
-		const message = {
-			ok: false,
-			signedUploadUrl: ""
-		};
-		globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
-			enumerable: false,
-			value: this
-		});
-		if (value !== void 0) reflectionMergePartial(this, message, value);
-		return message;
-	}
-	internalBinaryRead(reader, length, options, target) {
-		let message = target !== null && target !== void 0 ? target : this.create(), end = reader.pos + length;
-		while (reader.pos < end) {
-			let [fieldNo, wireType] = reader.tag();
-			switch (fieldNo) {
-				case 1:
-					message.ok = reader.bool();
-					break;
-				case 2:
-					message.signedUploadUrl = reader.string();
-					break;
-				default:
-					let u = options.readUnknownField;
-					if (u === "throw") throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-					let d = reader.skip(wireType);
-					if (u !== false) (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-			}
-		}
-		return message;
-	}
-	internalBinaryWrite(message, writer, options) {
-		if (message.ok !== false) writer.tag(1, WireType.Varint).bool(message.ok);
-		if (message.signedUploadUrl !== "") writer.tag(2, WireType.LengthDelimited).string(message.signedUploadUrl);
-		let u = options.writeUnknownFields;
-		if (u !== false) (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-		return writer;
-	}
-};
-/**
-* @generated MessageType for protobuf message github.actions.results.api.v1.MigrateArtifactResponse
-*/
-const MigrateArtifactResponse = new MigrateArtifactResponse$Type();
-var FinalizeMigratedArtifactRequest$Type = class extends MessageType {
-	constructor() {
-		super("github.actions.results.api.v1.FinalizeMigratedArtifactRequest", [
-			{
-				no: 1,
-				name: "workflow_run_backend_id",
-				kind: "scalar",
-				T: 9
-			},
-			{
-				no: 2,
-				name: "name",
-				kind: "scalar",
-				T: 9
-			},
-			{
-				no: 3,
-				name: "size",
-				kind: "scalar",
-				T: 3
-			}
-		]);
-	}
-	create(value) {
-		const message = {
-			workflowRunBackendId: "",
-			name: "",
-			size: "0"
-		};
-		globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
-			enumerable: false,
-			value: this
-		});
-		if (value !== void 0) reflectionMergePartial(this, message, value);
-		return message;
-	}
-	internalBinaryRead(reader, length, options, target) {
-		let message = target !== null && target !== void 0 ? target : this.create(), end = reader.pos + length;
-		while (reader.pos < end) {
-			let [fieldNo, wireType] = reader.tag();
-			switch (fieldNo) {
-				case 1:
-					message.workflowRunBackendId = reader.string();
-					break;
-				case 2:
-					message.name = reader.string();
-					break;
-				case 3:
-					message.size = reader.int64().toString();
-					break;
-				default:
-					let u = options.readUnknownField;
-					if (u === "throw") throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-					let d = reader.skip(wireType);
-					if (u !== false) (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-			}
-		}
-		return message;
-	}
-	internalBinaryWrite(message, writer, options) {
-		if (message.workflowRunBackendId !== "") writer.tag(1, WireType.LengthDelimited).string(message.workflowRunBackendId);
-		if (message.name !== "") writer.tag(2, WireType.LengthDelimited).string(message.name);
-		if (message.size !== "0") writer.tag(3, WireType.Varint).int64(message.size);
-		let u = options.writeUnknownFields;
-		if (u !== false) (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-		return writer;
-	}
-};
-/**
-* @generated MessageType for protobuf message github.actions.results.api.v1.FinalizeMigratedArtifactRequest
-*/
-const FinalizeMigratedArtifactRequest = new FinalizeMigratedArtifactRequest$Type();
-var FinalizeMigratedArtifactResponse$Type = class extends MessageType {
-	constructor() {
-		super("github.actions.results.api.v1.FinalizeMigratedArtifactResponse", [{
-			no: 1,
-			name: "ok",
-			kind: "scalar",
-			T: 8
-		}, {
-			no: 2,
-			name: "artifact_id",
-			kind: "scalar",
-			T: 3
-		}]);
-	}
-	create(value) {
-		const message = {
-			ok: false,
-			artifactId: "0"
-		};
-		globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
-			enumerable: false,
-			value: this
-		});
-		if (value !== void 0) reflectionMergePartial(this, message, value);
-		return message;
-	}
-	internalBinaryRead(reader, length, options, target) {
-		let message = target !== null && target !== void 0 ? target : this.create(), end = reader.pos + length;
-		while (reader.pos < end) {
-			let [fieldNo, wireType] = reader.tag();
-			switch (fieldNo) {
-				case 1:
-					message.ok = reader.bool();
-					break;
-				case 2:
-					message.artifactId = reader.int64().toString();
-					break;
-				default:
-					let u = options.readUnknownField;
-					if (u === "throw") throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-					let d = reader.skip(wireType);
-					if (u !== false) (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-			}
-		}
-		return message;
-	}
-	internalBinaryWrite(message, writer, options) {
-		if (message.ok !== false) writer.tag(1, WireType.Varint).bool(message.ok);
-		if (message.artifactId !== "0") writer.tag(2, WireType.Varint).int64(message.artifactId);
-		let u = options.writeUnknownFields;
-		if (u !== false) (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-		return writer;
-	}
-};
-/**
-* @generated MessageType for protobuf message github.actions.results.api.v1.FinalizeMigratedArtifactResponse
-*/
-const FinalizeMigratedArtifactResponse = new FinalizeMigratedArtifactResponse$Type();
 var CreateArtifactRequest$Type = class extends MessageType {
 	constructor() {
 		super("github.actions.results.api.v1.CreateArtifactRequest", [
@@ -6600,6 +6341,12 @@ var CreateArtifactRequest$Type = class extends MessageType {
 				name: "version",
 				kind: "scalar",
 				T: 5
+			},
+			{
+				no: 6,
+				name: "mime_type",
+				kind: "message",
+				T: () => StringValue
 			}
 		]);
 	}
@@ -6637,6 +6384,9 @@ var CreateArtifactRequest$Type = class extends MessageType {
 				case 5:
 					message.version = reader.int32();
 					break;
+				case 6:
+					message.mimeType = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.mimeType);
+					break;
 				default:
 					let u = options.readUnknownField;
 					if (u === "throw") throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
@@ -6652,6 +6402,7 @@ var CreateArtifactRequest$Type = class extends MessageType {
 		if (message.name !== "") writer.tag(3, WireType.LengthDelimited).string(message.name);
 		if (message.expiresAt) Timestamp.internalBinaryWrite(message.expiresAt, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
 		if (message.version !== 0) writer.tag(5, WireType.Varint).int32(message.version);
+		if (message.mimeType) StringValue.internalBinaryWrite(message.mimeType, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
 		let u = options.writeUnknownFields;
 		if (u !== false) (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
 		return writer;
@@ -6957,7 +6708,7 @@ var ListArtifactsResponse$Type = class extends MessageType {
 			no: 1,
 			name: "artifacts",
 			kind: "message",
-			repeat: 1,
+			repeat: 2,
 			T: () => ListArtifactsResponse_MonolithArtifact
 		}]);
 	}
@@ -7390,18 +7141,6 @@ new ServiceType("github.actions.results.api.v1.ArtifactService", [
 		options: {},
 		I: DeleteArtifactRequest,
 		O: DeleteArtifactResponse
-	},
-	{
-		name: "MigrateArtifact",
-		options: {},
-		I: MigrateArtifactRequest,
-		O: MigrateArtifactResponse
-	},
-	{
-		name: "FinalizeMigratedArtifact",
-		options: {},
-		I: FinalizeMigratedArtifactRequest,
-		O: FinalizeMigratedArtifactResponse
 	}
 ]);
 var ArtifactServiceClientJSON = class {
@@ -7540,7 +7279,7 @@ var package_exports = /* @__PURE__ */ __exportAll({
 }), name, version$2, description, keywords, homepage, type, main, types, exports$1, directories, files, publishConfig, repository, scripts, bugs, dependencies, devDependencies, overrides, package_default;
 var init_package = __esmMin((() => {
 	name = "@actions/artifact";
-	version$2 = "6.1.0";
+	version$2 = "6.2.0";
 	description = "Actions artifact lib";
 	keywords = [
 		"github",
@@ -7812,7 +7551,7 @@ function maskSecretUrls(body) {
 	if ("signed_upload_url" in body && typeof body.signed_upload_url === "string") maskSigUrl(body.signed_upload_url);
 	if ("signed_url" in body && typeof body.signed_url === "string") maskSigUrl(body.signed_url);
 }
-var __awaiter$8 = function(thisArg, _arguments, P, generator) {
+var __awaiter$9 = function(thisArg, _arguments, P, generator) {
 	function adopt(value) {
 		return value instanceof P ? value : new P(function(resolve) {
 			resolve(value);
@@ -7852,12 +7591,12 @@ var ArtifactHttpClient = class {
 		this.httpClient = new HttpClient(userAgent, [new BearerCredentialHandler(token)]);
 	}
 	request(service, method, contentType, data) {
-		return __awaiter$8(this, void 0, void 0, function* () {
+		return __awaiter$9(this, void 0, void 0, function* () {
 			const url = new URL(`/twirp/${service}/${method}`, this.baseUrl).href;
 			debug(`[Request] ${method} ${url}`);
 			const headers = { "Content-Type": contentType };
 			try {
-				const { body } = yield this.retryableRequest(() => __awaiter$8(this, void 0, void 0, function* () {
+				const { body } = yield this.retryableRequest(() => __awaiter$9(this, void 0, void 0, function* () {
 					return this.httpClient.post(url, JSON.stringify(data), headers);
 				}));
 				return body;
@@ -7867,7 +7606,7 @@ var ArtifactHttpClient = class {
 		});
 	}
 	retryableRequest(operation) {
-		return __awaiter$8(this, void 0, void 0, function* () {
+		return __awaiter$9(this, void 0, void 0, function* () {
 			let attempt = 0;
 			let errorMessage = "";
 			let rawBody = "";
@@ -7924,7 +7663,7 @@ var ArtifactHttpClient = class {
 		].includes(statusCode);
 	}
 	sleep(milliseconds) {
-		return __awaiter$8(this, void 0, void 0, function* () {
+		return __awaiter$9(this, void 0, void 0, function* () {
 			return new Promise((resolve) => setTimeout(resolve, milliseconds));
 		});
 	}
@@ -35246,7 +34985,7 @@ var PageBlobClient = class PageBlobClient extends BlobClient {
 		});
 	}
 };
-var __awaiter$7 = function(thisArg, _arguments, P, generator) {
+var __awaiter$8 = function(thisArg, _arguments, P, generator) {
 	function adopt(value) {
 		return value instanceof P ? value : new P(function(resolve) {
 			resolve(value);
@@ -35273,12 +35012,12 @@ var __awaiter$7 = function(thisArg, _arguments, P, generator) {
 		step((generator = generator.apply(thisArg, _arguments || [])).next());
 	});
 };
-function uploadZipToBlobStorage(authenticatedUploadURL, zipUploadStream) {
-	return __awaiter$7(this, void 0, void 0, function* () {
+function uploadToBlobStorage(authenticatedUploadURL, uploadStream, contentType) {
+	return __awaiter$8(this, void 0, void 0, function* () {
 		let uploadByteCount = 0;
 		let lastProgressTime = Date.now();
 		const abortController = new AbortController();
-		const chunkTimer = (interval) => __awaiter$7(this, void 0, void 0, function* () {
+		const chunkTimer = (interval) => __awaiter$8(this, void 0, void 0, function* () {
 			return new Promise((resolve, reject) => {
 				const timer = setInterval(() => {
 					if (Date.now() - lastProgressTime > interval) reject(/* @__PURE__ */ new Error("Upload progress stalled."));
@@ -35292,25 +35031,25 @@ function uploadZipToBlobStorage(authenticatedUploadURL, zipUploadStream) {
 		const maxConcurrency = getConcurrency();
 		const bufferSize = getUploadChunkSize();
 		const blockBlobClient = new BlobClient(authenticatedUploadURL).getBlockBlobClient();
-		debug(`Uploading artifact zip to blob storage with maxConcurrency: ${maxConcurrency}, bufferSize: ${bufferSize}`);
+		debug(`Uploading artifact to blob storage with maxConcurrency: ${maxConcurrency}, bufferSize: ${bufferSize}, contentType: ${contentType}`);
 		const uploadCallback = (progress) => {
 			info(`Uploaded bytes ${progress.loadedBytes}`);
 			uploadByteCount = progress.loadedBytes;
 			lastProgressTime = Date.now();
 		};
 		const options = {
-			blobHTTPHeaders: { blobContentType: "zip" },
+			blobHTTPHeaders: { blobContentType: contentType },
 			onProgress: uploadCallback,
 			abortSignal: abortController.signal
 		};
 		let sha256Hash = void 0;
-		const uploadStream = new stream$2.PassThrough();
+		const blobUploadStream = new stream$2.PassThrough();
 		const hashStream = crypto$1.createHash("sha256");
-		zipUploadStream.pipe(uploadStream);
-		zipUploadStream.pipe(hashStream).setEncoding("hex");
+		uploadStream.pipe(blobUploadStream);
+		uploadStream.pipe(hashStream).setEncoding("hex");
 		info("Beginning upload of artifact content to blob storage");
 		try {
-			yield Promise.race([blockBlobClient.uploadStream(uploadStream, bufferSize, maxConcurrency, options), chunkTimer(getUploadChunkTimeout())]);
+			yield Promise.race([blockBlobClient.uploadStream(blobUploadStream, bufferSize, maxConcurrency, options), chunkTimer(getUploadChunkTimeout())]);
 		} catch (error) {
 			if (NetworkError.isNetworkErrorCode(error === null || error === void 0 ? void 0 : error.code)) throw new NetworkError(error === null || error === void 0 ? void 0 : error.code);
 			throw error;
@@ -35320,7 +35059,7 @@ function uploadZipToBlobStorage(authenticatedUploadURL, zipUploadStream) {
 		info("Finished uploading artifact content to blob storage!");
 		hashStream.end();
 		sha256Hash = hashStream.read();
-		info(`SHA256 digest of uploaded artifact zip is ${sha256Hash}`);
+		info(`SHA256 digest of uploaded artifact is ${sha256Hash}`);
 		if (uploadByteCount === 0) warning(`No data was uploaded to blob storage. Reported upload byte count is 0.`);
 		return {
 			uploadSize: uploadByteCount,
@@ -61873,6 +61612,58 @@ var import_archiver = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((e
 	vending.registerFormat("json", require_json());
 	module.exports = vending;
 })))(), 1);
+var __awaiter$7 = function(thisArg, _arguments, P, generator) {
+	function adopt(value) {
+		return value instanceof P ? value : new P(function(resolve) {
+			resolve(value);
+		});
+	}
+	return new (P || (P = Promise))(function(resolve, reject) {
+		function fulfilled(value) {
+			try {
+				step(generator.next(value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function rejected(value) {
+			try {
+				step(generator["throw"](value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function step(result) {
+			result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+		}
+		step((generator = generator.apply(thisArg, _arguments || [])).next());
+	});
+};
+var WaterMarkedUploadStream = class extends stream$2.Transform {
+	constructor(bufferSize) {
+		super({ highWaterMark: bufferSize });
+	}
+	_transform(chunk, enc, cb) {
+		cb(null, chunk);
+	}
+};
+function createRawFileUploadStream(filePath) {
+	return __awaiter$7(this, void 0, void 0, function* () {
+		debug(`Creating raw file upload stream for: ${filePath}`);
+		const bufferSize = getUploadChunkSize();
+		const uploadStream = new WaterMarkedUploadStream(bufferSize);
+		let sourcePath = filePath;
+		if ((yield fs$8.promises.lstat(filePath)).isSymbolicLink()) sourcePath = yield realpath(filePath);
+		const fileStream = fs$8.createReadStream(sourcePath, { highWaterMark: bufferSize });
+		fileStream.on("error", (error$2) => {
+			error("An error has occurred while reading the file for upload");
+			error(String(error$2));
+			uploadStream.destroy(/* @__PURE__ */ new Error("An error has occurred during file read for the artifact"));
+		});
+		fileStream.pipe(uploadStream);
+		return uploadStream;
+	});
+}
 var __awaiter$6 = function(thisArg, _arguments, P, generator) {
 	function adopt(value) {
 		return value instanceof P ? value : new P(function(resolve) {
@@ -61900,14 +61691,6 @@ var __awaiter$6 = function(thisArg, _arguments, P, generator) {
 		step((generator = generator.apply(thisArg, _arguments || [])).next());
 	});
 };
-var ZipUploadStream = class extends stream$2.Transform {
-	constructor(bufferSize) {
-		super({ highWaterMark: bufferSize });
-	}
-	_transform(chunk, enc, cb) {
-		cb(null, chunk);
-	}
-};
 function createZipUploadStream(uploadSpecification_1) {
 	return __awaiter$6(this, arguments, void 0, function* (uploadSpecification, compressionLevel = 6) {
 		debug(`Creating Artifact archive with compressionLevel: ${compressionLevel}`);
@@ -61924,7 +61707,7 @@ function createZipUploadStream(uploadSpecification_1) {
 			if (file.stats.isSymbolicLink()) sourcePath = yield realpath(file.sourcePath);
 			zip.file(sourcePath, { name: file.destinationPath });
 		} else zip.append("", { name: file.destinationPath });
-		const zipUploadStream = new ZipUploadStream(getUploadChunkSize());
+		const zipUploadStream = new WaterMarkedUploadStream(getUploadChunkSize());
 		debug(`Zip write high watermark value ${zipUploadStream.writableHighWaterMark}`);
 		debug(`Zip read high watermark value ${zipUploadStream.readableHighWaterMark}`);
 		zip.pipe(zipUploadStream);
@@ -61952,6 +61735,65 @@ var zipFinishCallback = () => {
 var zipEndCallback = () => {
 	debug("Zip stream for upload has ended.");
 };
+/**
+* Maps file extensions to MIME types
+*/
+var mimeTypes = {
+	".txt": "text/plain",
+	".html": "text/html",
+	".htm": "text/html",
+	".css": "text/css",
+	".csv": "text/csv",
+	".xml": "text/xml",
+	".md": "text/markdown",
+	".js": "application/javascript",
+	".mjs": "application/javascript",
+	".json": "application/json",
+	".png": "image/png",
+	".jpg": "image/jpeg",
+	".jpeg": "image/jpeg",
+	".gif": "image/gif",
+	".svg": "image/svg+xml",
+	".webp": "image/webp",
+	".ico": "image/x-icon",
+	".bmp": "image/bmp",
+	".tiff": "image/tiff",
+	".tif": "image/tiff",
+	".mp3": "audio/mpeg",
+	".wav": "audio/wav",
+	".ogg": "audio/ogg",
+	".flac": "audio/flac",
+	".mp4": "video/mp4",
+	".webm": "video/webm",
+	".avi": "video/x-msvideo",
+	".mov": "video/quicktime",
+	".pdf": "application/pdf",
+	".doc": "application/msword",
+	".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+	".xls": "application/vnd.ms-excel",
+	".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+	".ppt": "application/vnd.ms-powerpoint",
+	".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+	".zip": "application/zip",
+	".tar": "application/x-tar",
+	".gz": "application/gzip",
+	".rar": "application/vnd.rar",
+	".7z": "application/x-7z-compressed",
+	".wasm": "application/wasm",
+	".yaml": "application/x-yaml",
+	".yml": "application/x-yaml",
+	".woff": "font/woff",
+	".woff2": "font/woff2",
+	".ttf": "font/ttf",
+	".otf": "font/otf",
+	".eot": "application/vnd.ms-fontobject"
+};
+/**
+* Gets the MIME type for a file based on its extension
+*/
+function getMimeType(filePath) {
+	return mimeTypes[path$2.extname(filePath).toLowerCase()] || "application/octet-stream";
+}
 var __awaiter$5 = function(thisArg, _arguments, P, generator) {
 	function adopt(value) {
 		return value instanceof P ? value : new P(function(resolve) {
@@ -61981,24 +61823,40 @@ var __awaiter$5 = function(thisArg, _arguments, P, generator) {
 };
 function uploadArtifact(name, files, rootDirectory, options) {
 	return __awaiter$5(this, void 0, void 0, function* () {
+		let artifactFileName = `${name}.zip`;
+		if (options === null || options === void 0 ? void 0 : options.skipArchive) {
+			if (files.length === 0) throw new FilesNotFoundError([]);
+			if (files.length > 1) throw new Error("skipArchive option is only supported when uploading a single file");
+			if (!fs$8.existsSync(files[0])) throw new FilesNotFoundError(files);
+			artifactFileName = path$2.basename(files[0]);
+			name = artifactFileName;
+		}
 		validateArtifactName(name);
 		validateRootDirectory(rootDirectory);
-		const zipSpecification = getUploadZipSpecification(files, rootDirectory);
-		if (zipSpecification.length === 0) throw new FilesNotFoundError(zipSpecification.flatMap((s) => s.sourcePath ? [s.sourcePath] : []));
+		let zipSpecification = [];
+		if (!(options === null || options === void 0 ? void 0 : options.skipArchive)) {
+			zipSpecification = getUploadZipSpecification(files, rootDirectory);
+			if (zipSpecification.length === 0) throw new FilesNotFoundError(zipSpecification.flatMap((s) => s.sourcePath ? [s.sourcePath] : []));
+		}
+		const contentType = getMimeType(artifactFileName);
 		const backendIds = getBackendIdsFromToken();
 		const artifactClient = internalArtifactTwirpClient();
 		const createArtifactReq = {
 			workflowRunBackendId: backendIds.workflowRunBackendId,
 			workflowJobRunBackendId: backendIds.workflowJobRunBackendId,
 			name,
-			version: 4
+			mimeType: StringValue.create({ value: contentType }),
+			version: 7
 		};
 		const expiresAt = getExpiration(options === null || options === void 0 ? void 0 : options.retentionDays);
 		if (expiresAt) createArtifactReq.expiresAt = expiresAt;
 		const createArtifactResp = yield artifactClient.CreateArtifact(createArtifactReq);
 		if (!createArtifactResp.ok) throw new InvalidResponseError("CreateArtifact: response from backend was not ok");
-		const zipUploadStream = yield createZipUploadStream(zipSpecification, options === null || options === void 0 ? void 0 : options.compressionLevel);
-		const uploadResult = yield uploadZipToBlobStorage(createArtifactResp.signedUploadUrl, zipUploadStream);
+		let stream;
+		if (options === null || options === void 0 ? void 0 : options.skipArchive) stream = yield createRawFileUploadStream(files[0]);
+		else stream = yield createZipUploadStream(zipSpecification, options === null || options === void 0 ? void 0 : options.compressionLevel);
+		info(`Uploading artifact: ${artifactFileName}`);
+		const uploadResult = yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, stream, contentType);
 		const finalizeArtifactReq = {
 			workflowRunBackendId: backendIds.workflowRunBackendId,
 			workflowJobRunBackendId: backendIds.workflowJobRunBackendId,
@@ -62010,7 +61868,7 @@ function uploadArtifact(name, files, rootDirectory, options) {
 		const finalizeArtifactResp = yield artifactClient.FinalizeArtifact(finalizeArtifactReq);
 		if (!finalizeArtifactResp.ok) throw new InvalidResponseError("FinalizeArtifact: response from backend was not ok");
 		const artifactId = BigInt(finalizeArtifactResp.artifactId);
-		info(`Artifact ${name}.zip successfully finalized. Artifact ID ${artifactId}`);
+		info(`Artifact ${name} successfully finalized. Artifact ID ${artifactId}`);
 		return {
 			size: uploadResult.uploadSize,
 			digest: uploadResult.sha256Hash,
@@ -63459,7 +63317,7 @@ var require_parser_stream = /* @__PURE__ */ __commonJSMin(((exports, module) => 
 	module.exports = ParserStream;
 }));
 var require_mkdirp = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var path$2 = __require("path");
+	var path$1 = __require("path");
 	var fs$4 = __require("fs");
 	var _0777 = parseInt("0777", 8);
 	module.exports = mkdirP.mkdirp = mkdirP.mkdirP = mkdirP;
@@ -63473,7 +63331,7 @@ var require_mkdirp = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 		if (mode === void 0) mode = _0777;
 		if (!made) made = null;
 		var cb = f || function() {};
-		p = path$2.resolve(p);
+		p = path$1.resolve(p);
 		xfs.mkdir(p, mode, function(er) {
 			if (!er) {
 				made = made || p;
@@ -63482,8 +63340,8 @@ var require_mkdirp = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			switch (er.code) {
 				case "ENOENT":
 					/* istanbul ignore if */
-					if (path$2.dirname(p) === p) return cb(er);
-					mkdirP(path$2.dirname(p), opts, function(er, made) {
+					if (path$1.dirname(p) === p) return cb(er);
+					mkdirP(path$1.dirname(p), opts, function(er, made) {
 						/* istanbul ignore if */
 						if (er) cb(er, made);
 						else mkdirP(p, opts, cb, made);
@@ -63504,14 +63362,14 @@ var require_mkdirp = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 		var xfs = opts.fs || fs$4;
 		if (mode === void 0) mode = _0777;
 		if (!made) made = null;
-		p = path$2.resolve(p);
+		p = path$1.resolve(p);
 		try {
 			xfs.mkdirSync(p, mode);
 			made = made || p;
 		} catch (err0) {
 			switch (err0.code) {
 				case "ENOENT":
-					made = sync(path$2.dirname(p), opts, made);
+					made = sync(path$1.dirname(p), opts, made);
 					sync(p, opts, made);
 					break;
 				default:
@@ -63531,7 +63389,7 @@ var require_mkdirp = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 }));
 var require_extract = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	var fs$3 = __require("fs");
-	var path$1 = __require("path");
+	var path = __require("path");
 	var util$1 = __require("util");
 	var mkdirp = require_mkdirp();
 	var Transform$1 = __require("stream").Transform;
@@ -63572,8 +63430,8 @@ var require_extract = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	};
 	Extract.prototype._processEntry = function(entry) {
 		var self = this;
-		var destPath = path$1.join(this.opts.path, entry.path);
-		var directory = entry.isDirectory ? destPath : path$1.dirname(destPath);
+		var destPath = path.join(this.opts.path, entry.path);
+		var directory = entry.isDirectory ? destPath : path.dirname(destPath);
 		this.unfinishedEntries++;
 		var writeFileFn = function() {
 			var pipedStream = fs$3.createWriteStream(destPath);
@@ -63678,7 +63536,7 @@ function streamExtractExternal(url_1, directory_1) {
 		const contentDisposition = response.message.headers["content-disposition"] || "";
 		let fileName = "artifact";
 		const filenameMatch = contentDisposition.match(/filename\*?=['"]?(?:UTF-\d['"]*)?([^;\r\n"']*)['"]?/i);
-		if (filenameMatch && filenameMatch[1]) fileName = path.basename(decodeURIComponent(filenameMatch[1].trim()));
+		if (filenameMatch && filenameMatch[1]) fileName = path$2.basename(decodeURIComponent(filenameMatch[1].trim()));
 		debug(`Content-Type: ${contentType}, mimeType: ${mimeType}, urlEndsWithZip: ${urlEndsWithZip}, isZip: ${isZip}, skipDecompress: ${skipDecompress}`);
 		debug(`Content-Disposition: ${contentDisposition}, fileName: ${fileName}`);
 		let sha256Digest = void 0;
@@ -63711,7 +63569,7 @@ function streamExtractExternal(url_1, directory_1) {
 			};
 			if (isZip && !skipDecompress) passThrough.pipe(import_unzip.Extract({ path: directory })).on("close", onClose).on("error", onError);
 			else {
-				const filePath = path.join(directory, fileName);
+				const filePath = path$2.join(directory, fileName);
 				const writeStream = fs$8.createWriteStream(filePath);
 				info(`Downloading raw file (non-zip) to: ${filePath}`);
 				passThrough.pipe(writeStream).on("close", onClose).on("error", onError);
@@ -65522,7 +65380,7 @@ var downloadArtifact = (artId, artName, downloadPath, findBy) => tryPromise({
 	})
 });
 var readResultFile = (downloadPath, artName) => tryPromise({
-	try: () => fs$2.readFile(path.join(downloadPath, "result.json"), "utf-8"),
+	try: () => fs$2.readFile(path$2.join(downloadPath, "result.json"), "utf-8"),
 	catch: (e) => new ArtifactError({
 		name: artName,
 		message: `Failed to read result file: ${e}`
@@ -65559,13 +65417,13 @@ var ArtifactService = class extends Service()("ArtifactService", { succeed: {
 		const artifactName = createArtifactName(displayName);
 		return gen(function* () {
 			const tempDir = yield* tryPromise({
-				try: () => fs$2.mkdtemp(path.join(os$2.tmpdir(), "dix-")),
+				try: () => fs$2.mkdtemp(path$2.join(os$2.tmpdir(), "dix-")),
 				catch: (e) => new ArtifactError({
 					name: artifactName,
 					message: `Failed to create temp directory: ${e}`
 				})
 			});
-			const resultPath = path.join(tempDir, "result.json");
+			const resultPath = path$2.join(tempDir, "result.json");
 			yield* tryPromise({
 				try: () => fs$2.writeFile(resultPath, JSON.stringify(results, null, 2)),
 				catch: (e) => new ArtifactError({
@@ -65585,7 +65443,7 @@ var ArtifactService = class extends Service()("ArtifactService", { succeed: {
 		});
 	},
 	downloadAllDiffResults: (token, runId, owner, repo) => {
-		const downloadPath = path.join(os$2.tmpdir(), "dix-results");
+		const downloadPath = path$2.join(os$2.tmpdir(), "dix-results");
 		const findBy = {
 			token,
 			workflowRunId: runId,
@@ -72327,7 +72185,7 @@ const processDiffResults = (options) => gen(function* () {
 	const git = yield* GitService;
 	const nix = yield* NixService;
 	const worktree = yield* git.createWorktree(options.baseRef, options.runId);
-	const relativePath = path.relative(options.cwd, options.directory);
+	const relativePath = path$2.relative(options.cwd, options.directory);
 	const baseFlakeRef = relativePath === "" || relativePath === "." ? `path:${worktree.path}` : `path:${worktree.path}?dir=${relativePath}`;
 	const prFlakeRef = options.directory;
 	yield* all([nix.prefetchFlakeInputs(baseFlakeRef), nix.prefetchFlakeInputs(prFlakeRef)], { concurrency: 2 });
