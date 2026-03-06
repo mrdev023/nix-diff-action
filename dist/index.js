@@ -1,4 +1,4 @@
-import { $n as match$2, A as catchAll$2, B as map$4, C as option, Cr as __toESM, D as Service, E as isConfigError, F as forEach, G as scoped$2, H as orElseSucceed, I as gen, J as tapError$2, Jn as fromNullable, K as succeed$2, L as logError, M as catchTags, N as fail$2, O as all, On as fromEnv$1, P as flatMap$3, Qn as map$5, R as logInfo, Rn as orElse$3, Rt as merge$2, S as boolean, Sr as __toCommonJS, T as string, U as provide$2, V as mapError$2, W as runPromise, X as try_, Xn as isNone, Y as tryPromise, Yn as getOrElse, Zn as isSome, Zt as scopedDiscard$1, _ as Struct, _r as require_tunnel, a as GitHubApiError, ar as getInput, b as pattern, bn as make$3, br as __exportAll, c as MissingAttributesError, cr as setFailed$1, d as NixPathInfoError, dr as warning, er as none, f as NotPullRequestContextError, fr as exec, g as NonEmptyString, gn as withConfigProviderScoped, gr as require_undici, h as Literal, hr as HttpCodes, i as AttributeParseError, ir as error, j as catchIf, jn as fromMap$1, k as as, l as NixBuildError, lr as setOutput, m as Config, mr as HttpClient, nr as pipe, o as InvalidCommentStrategyError, p as Array$, pr as BearerCredentialHandler, q as sync$2, qn as flatMap$2, r as ArtifactError, rr as debug, s as InvalidDirectoryError, sr as info, t as GitService, tr as some$2, u as NixDixError, ur as setSecret, v as decodeUnknown, vr as __commonJSMin, w as redacted, x as value, xn as set, xr as __require, y as filter$2, yn as get, yr as __esmMin, z as logWarning, zt as mergeAll$1 } from "./assets/git-DtFRI9bQ.js";
+import { $n as match$2, A as catchAll$2, B as map$4, C as option, Cr as __toESM, D as Service, E as isConfigError, F as forEach, G as scoped$2, H as orElseSucceed, I as gen, J as tapError$2, Jn as fromNullable, K as succeed$2, L as logError, M as catchTags, N as fail$2, O as all, On as fromEnv$1, P as flatMap$3, Qn as map$5, R as logInfo, Rn as orElse$3, Rt as merge$2, S as boolean, Sr as __toCommonJS, T as string, U as provide$2, V as mapError$2, W as runPromise, X as try_, Xn as isNone, Y as tryPromise, Yn as getOrElse, Zn as isSome, Zt as scopedDiscard$1, _ as Struct, _r as require_tunnel, a as GitHubApiError, ar as getInput, b as pattern, bn as make$3, br as __exportAll, c as MissingAttributesError, cr as setFailed$1, d as NixPathInfoError, dr as warning, er as none, f as NotPullRequestContextError, fr as exec, g as NonEmptyString, gn as withConfigProviderScoped, gr as require_undici, h as Literal, hr as HttpCodes, i as AttributeParseError, ir as error, j as catchIf, jn as fromMap$1, k as as, l as NixBuildError, lr as setOutput, m as Config, mr as HttpClient, nr as pipe, o as InvalidCommentStrategyError, p as Array$, pr as BearerCredentialHandler, q as sync$2, qn as flatMap$2, r as ArtifactError, rr as debug, s as InvalidDirectoryError, sr as info, t as GitService, tr as some$2, u as NixDixError, ur as setSecret, v as decodeUnknown, vr as __commonJSMin, w as redacted, x as value, xn as set, xr as __require, y as filter$2, yn as get, yr as __esmMin, z as logWarning, zt as mergeAll$1 } from "./assets/git-BnCC41gc.js";
 import * as os$2 from "os";
 import os, { EOL } from "os";
 import * as crypto$1 from "crypto";
@@ -43668,6 +43668,12 @@ var require_lazystream = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	}
 }));
 var require_normalize_path = /* @__PURE__ */ __commonJSMin(((exports, module) => {
+	/*!
+	* normalize-path <https://github.com/jonschlinkert/normalize-path>
+	*
+	* Copyright (c) 2014-2018, Jon Schlinkert.
+	* Released under the MIT License.
+	*/
 	module.exports = function(path, stripTrailing) {
 		if (typeof path !== "string") throw new TypeError("expected path to be a string");
 		if (path === "\\" || path === "/") return "/";
@@ -46770,6 +46776,7 @@ var require_state = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	};
 }));
 var require_safe_buffer = /* @__PURE__ */ __commonJSMin(((exports, module) => {
+	/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 	var buffer$1 = __require("buffer");
 	var Buffer = buffer$1.Buffer;
 	function copyProps(src, dst) {
