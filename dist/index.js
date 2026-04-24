@@ -908,6 +908,16 @@ function getProxyFetch(destinationUrl) {
 function getApiBaseUrl() {
 	return process.env["GITHUB_API_URL"] || "https://api.github.com";
 }
+function getUserAgentWithOrchestrationId(baseUserAgent) {
+	var _a;
+	const orchId = (_a = process.env["ACTIONS_ORCHESTRATION_ID"]) === null || _a === void 0 ? void 0 : _a.trim();
+	if (orchId) {
+		const tag = `actions_orchestration_id/${orchId.replace(/[^a-z0-9_.-]/gi, "_")}`;
+		if (baseUserAgent === null || baseUserAgent === void 0 ? void 0 : baseUserAgent.includes(tag)) return baseUserAgent;
+		return `${baseUserAgent ? `${baseUserAgent} ` : ""}${tag}`;
+	}
+	return baseUserAgent;
+}
 function getUserAgent() {
 	if (typeof navigator === "object" && "userAgent" in navigator) return navigator.userAgent;
 	if (typeof process === "object" && process.version !== void 0) return `Node.js/${process.version.substr(1)} (${process.platform}; ${process.arch})`;
@@ -3269,6 +3279,8 @@ function getOctokitOptions(token, options) {
 	const opts = Object.assign({}, options || {});
 	const auth = getAuthString(token, opts);
 	if (auth) opts.auth = auth;
+	const userAgent = getUserAgentWithOrchestrationId(opts.userAgent);
+	if (userAgent) opts.userAgent = userAgent;
 	return opts;
 }
 const context$2 = new Context();
@@ -7372,7 +7384,7 @@ var package_exports = /* @__PURE__ */ __exportAll({
 }), name, version$2, description, keywords, homepage, type, main, types, exports$1, directories, files, publishConfig, repository, scripts, bugs, dependencies, devDependencies, overrides, package_default;
 var init_package = __esmMin((() => {
 	name = "@actions/artifact";
-	version$2 = "6.2.0";
+	version$2 = "6.2.1";
 	description = "Actions artifact lib";
 	keywords = [
 		"github",
@@ -7513,7 +7525,7 @@ NetworkError.isNetworkErrorCode = (code) => {
 };
 var UsageError = class extends Error {
 	constructor() {
-		super(`Artifact storage quota has been hit. Unable to upload any new artifacts. Usage is recalculated every 6-12 hours.\nMore info on storage limits: https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions#calculating-minute-and-storage-spending`);
+		super(`Artifact storage quota has been hit. Unable to upload any new artifacts.\nMore info on storage limits: https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions#calculating-minute-and-storage-spending`);
 		this.name = "UsageError";
 	}
 };
@@ -63981,8 +63993,10 @@ function streamExtractExternal(url_1, directory_1) {
 		const isZip = mimeType === "application/zip" || mimeType === "application/x-zip-compressed" || mimeType === "application/zip-compressed" || urlEndsWithZip;
 		const contentDisposition = response.message.headers["content-disposition"] || "";
 		let fileName = "artifact";
-		const filenameMatch = contentDisposition.match(/filename\*?=['"]?(?:UTF-\d['"]*)?([^;\r\n"']*)['"]?/i);
-		if (filenameMatch && filenameMatch[1]) fileName = path$2.basename(decodeURIComponent(filenameMatch[1].trim()));
+		const filenameStar = contentDisposition.match(/filename\*\s*=\s*UTF-8''([^;\r\n]*)/i);
+		const filenamePlain = contentDisposition.match(/(?<!\*)filename\s*=\s*['"]?([^;\r\n"']*)['"]?/i);
+		const rawName = (filenameStar === null || filenameStar === void 0 ? void 0 : filenameStar[1]) || (filenamePlain === null || filenamePlain === void 0 ? void 0 : filenamePlain[1]);
+		if (rawName) fileName = path$2.basename(decodeURIComponent(rawName.trim()));
 		debug(`Content-Type: ${contentType}, mimeType: ${mimeType}, urlEndsWithZip: ${urlEndsWithZip}, isZip: ${isZip}, skipDecompress: ${skipDecompress}`);
 		debug(`Content-Disposition: ${contentDisposition}, fileName: ${fileName}`);
 		let sha256Digest = void 0;
