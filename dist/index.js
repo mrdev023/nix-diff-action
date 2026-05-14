@@ -1,4 +1,4 @@
-import { $ as runPromise, A as Service, At as warning, B as fail, Bt as __require, C as option$1, Ct as error, D as merge$1, Dt as setFailed$1, E as isConfigError, Et as info, F as catchAll, Ft as require_undici, G as logInfo, H as forEach, Ht as __toESM, I as catchAllCause, It as require_tunnel, J as mapError, K as logWarning, L as catchIf, Lt as __commonJSMin, M as all, Mt as BearerCredentialHandler, N as andThen, Nt as HttpClient, O as mergeAll, Ot as setOutput, P as as, Pt as HttpCodes, Q as provide, R as catchTag, Rt as __esmMin, S as boolean, St as debug, T as string, U as gen, V as flatMap, Vt as __toCommonJS, W as logError, X as orElseSucceed, Y as option, Z as promise, _ as Struct, _t as getOrUndefined, a as GitHubApiError, at as try_, b as pattern, bt as match, c as MissingAttributesError, ct as get, d as NixPathInfoError, dt as fromEnv$1, et as scoped, f as NotPullRequestContextError, ft as fromMap$1, g as NonEmptyString, gt as getOrElse, h as Literal, ht as fromNullable, i as AttributeParseError, it as tryPromise, j as acquireRelease, jt as exec, k as setConfigProvider, kt as setSecret, l as NixBuildError, lt as make, m as Config, mt as flatMap$1, nt as sync, o as InvalidCommentStrategyError, ot as TaggedError, p as Array$, pt as orElse$1, q as map$2, r as ArtifactError, rt as tapError, s as InvalidDirectoryError, st as pretty, t as GitService, tt as succeed, u as NixDixError, ut as set, v as decodeUnknown, vt as isNone, w as redacted, wt as getInput, x as value, xt as pipe, y as filter$2, yt as map$3, z as catchTags, zt as __exportAll } from "./assets/git-BLiFIhFa.js";
+import { $ as runPromise, A as Service, At as warning, B as fail, Bt as __require, C as option$1, Ct as error, D as merge$1, Dt as setFailed$1, E as isConfigError, Et as info, F as catchAll, Ft as require_undici, G as logInfo, H as forEach, Ht as __toESM, I as catchAllCause, It as require_tunnel, J as mapError, K as logWarning, L as catchIf, Lt as __commonJSMin, M as all, Mt as BearerCredentialHandler, N as andThen, Nt as HttpClient, O as mergeAll, Ot as setOutput, P as as, Pt as HttpCodes, Q as provide, R as catchTag, Rt as __esmMin, S as boolean, St as debug, T as string, U as gen, V as flatMap, Vt as __toCommonJS, W as logError, X as orElseSucceed, Y as option, Z as promise, _ as Struct, _t as getOrUndefined, a as GitHubApiError, at as try_, b as pattern, bt as match, c as MissingAttributesError, ct as get, d as NixPathInfoError, dt as fromEnv$1, et as scoped, f as NotPullRequestContextError, ft as fromMap$1, g as NonEmptyString, gt as getOrElse, h as Literal, ht as fromNullable, i as AttributeParseError, it as tryPromise, j as acquireRelease, jt as exec, k as setConfigProvider, kt as setSecret, l as NixBuildError, lt as make, m as Config, mt as flatMap$1, nt as sync, o as InvalidCommentStrategyError, ot as TaggedError, p as Array$, pt as orElse$1, q as map$2, r as ArtifactError, rt as tapError, s as InvalidDirectoryError, st as pretty, t as GitService, tt as succeed, u as NixDixError, ut as set, v as decodeUnknown, vt as isNone, w as redacted, wt as getInput, x as value, xt as pipe, y as filter$2, yt as map$3, z as catchTags, zt as __exportAll } from "./assets/git-DO3iRliX.js";
 import * as os$2 from "os";
 import os, { EOL } from "os";
 import * as crypto$1 from "crypto";
@@ -11918,14 +11918,25 @@ function createTokenCycler(credential, tokenCyclerOptions) {
 	* the rules of refreshing the token.
 	*/
 	const cycler = {
+		/**
+		* Produces true if a refresh job is currently in progress.
+		*/
 		get isRefreshing() {
 			return refreshWorker !== null;
 		},
+		/**
+		* Produces true if the cycler SHOULD refresh (we are within the refresh
+		* window and not already refreshing)
+		*/
 		get shouldRefresh() {
 			if (cycler.isRefreshing) return false;
 			if (token?.refreshAfterTimestamp && token.refreshAfterTimestamp < Date.now()) return true;
 			return (token?.expiresOnTimestamp ?? 0) - options.refreshWindowInMs < Date.now();
 		},
+		/**
+		* Produces true if the cycler MUST refresh (null or nearly-expired
+		* token).
+		*/
 		get mustRefresh() {
 			return token === null || token.expiresOnTimestamp - options.forcedRefreshWindowInMs < Date.now();
 		}
@@ -12031,6 +12042,19 @@ function bearerTokenAuthenticationPolicy(options) {
 	const getAccessToken = credential ? createTokenCycler(credential) : () => Promise.resolve(null);
 	return {
 		name: bearerTokenAuthenticationPolicyName,
+		/**
+		* If there's no challenge parameter:
+		* - It will try to retrieve the token using the cache, or the credential's getToken.
+		* - Then it will try the next policy with or without the retrieved token.
+		*
+		* It uses the challenge parameters to:
+		* - Skip a first attempt to get the token from the credential if there's no cached token,
+		*   since it expects the token to be retrievable only after the challenge.
+		* - Prepare the outgoing request if the `prepareRequest` method has been provided.
+		* - Send an initial request to receive the challenge if it fails.
+		* - Process a challenge if the response contains it.
+		* - Retrieve a token with the challenge information, then re-send the request.
+		*/
 		async sendRequest(request, next) {
 			if (!request.url.toLowerCase().startsWith("https://")) throw new Error("Bearer token authentication is not permitted for non-TLS protected (non-https) URLs.");
 			await callbacks.authorizeRequest({
@@ -13455,7 +13479,14 @@ function getCredentialScopes(options) {
 */
 var Constants = {
 	DefaultScope: "/.default",
-	HeaderConstants: { AUTHORIZATION: "authorization" }
+	/**
+	* Defines constants for use with HTTP headers.
+	*/
+	HeaderConstants: { 
+	/**
+	* The Authorization header.
+	*/
+AUTHORIZATION: "authorization" }
 };
 function isUuid(text) {
 	return /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/.test(text);
@@ -37952,12 +37983,21 @@ var PageBlobClient = class PageBlobClient extends BlobClient {
 		options.conditions = options.conditions || {};
 		const iter = this.listPageRangeItems(offset, count, options);
 		return {
+			/**
+			* The next method, part of the iteration protocol
+			*/
 			next() {
 				return iter.next();
 			},
+			/**
+			* The connection to the async iterator, part of the iteration protocol
+			*/
 			[Symbol.asyncIterator]() {
 				return this;
 			},
+			/**
+			* Return an AsyncIterableIterator that works a page at a time
+			*/
 			byPage: (settings = {}) => {
 				return this.listPageRangeItemSegments(offset, count, settings.continuationToken, {
 					maxPageSize: settings.maxPageSize,
@@ -38151,12 +38191,21 @@ var PageBlobClient = class PageBlobClient extends BlobClient {
 		options.conditions = options.conditions || {};
 		const iter = this.listPageRangeDiffItems(offset, count, prevSnapshot, { ...options });
 		return {
+			/**
+			* The next method, part of the iteration protocol
+			*/
 			next() {
 				return iter.next();
 			},
+			/**
+			* The connection to the async iterator, part of the iteration protocol
+			*/
 			[Symbol.asyncIterator]() {
 				return this;
 			},
+			/**
+			* Return an AsyncIterableIterator that works a page at a time
+			*/
 			byPage: (settings = {}) => {
 				return this.listPageRangeDiffItemSegments(offset, count, prevSnapshot, settings.continuationToken, {
 					maxPageSize: settings.maxPageSize,
@@ -48729,67 +48778,144 @@ var init_event_target_shim = __esmMin((() => {
 	privateData = /* @__PURE__ */ new WeakMap();
 	wrappers = /* @__PURE__ */ new WeakMap();
 	Event.prototype = {
+		/**
+		* The type of this event.
+		* @type {string}
+		*/
 		get type() {
 			return pd(this).event.type;
 		},
+		/**
+		* The target of this event.
+		* @type {EventTarget}
+		*/
 		get target() {
 			return pd(this).eventTarget;
 		},
+		/**
+		* The target of this event.
+		* @type {EventTarget}
+		*/
 		get currentTarget() {
 			return pd(this).currentTarget;
 		},
+		/**
+		* @returns {EventTarget[]} The composed path of this event.
+		*/
 		composedPath() {
 			const currentTarget = pd(this).currentTarget;
 			if (currentTarget == null) return [];
 			return [currentTarget];
 		},
+		/**
+		* Constant of NONE.
+		* @type {number}
+		*/
 		get NONE() {
 			return 0;
 		},
+		/**
+		* Constant of CAPTURING_PHASE.
+		* @type {number}
+		*/
 		get CAPTURING_PHASE() {
 			return 1;
 		},
+		/**
+		* Constant of AT_TARGET.
+		* @type {number}
+		*/
 		get AT_TARGET() {
 			return 2;
 		},
+		/**
+		* Constant of BUBBLING_PHASE.
+		* @type {number}
+		*/
 		get BUBBLING_PHASE() {
 			return 3;
 		},
+		/**
+		* The target of this event.
+		* @type {number}
+		*/
 		get eventPhase() {
 			return pd(this).eventPhase;
 		},
+		/**
+		* Stop event bubbling.
+		* @returns {void}
+		*/
 		stopPropagation() {
 			const data = pd(this);
 			data.stopped = true;
 			if (typeof data.event.stopPropagation === "function") data.event.stopPropagation();
 		},
+		/**
+		* Stop event bubbling.
+		* @returns {void}
+		*/
 		stopImmediatePropagation() {
 			const data = pd(this);
 			data.stopped = true;
 			data.immediateStopped = true;
 			if (typeof data.event.stopImmediatePropagation === "function") data.event.stopImmediatePropagation();
 		},
+		/**
+		* The flag to be bubbling.
+		* @type {boolean}
+		*/
 		get bubbles() {
 			return Boolean(pd(this).event.bubbles);
 		},
+		/**
+		* The flag to be cancelable.
+		* @type {boolean}
+		*/
 		get cancelable() {
 			return Boolean(pd(this).event.cancelable);
 		},
+		/**
+		* Cancel this event.
+		* @returns {void}
+		*/
 		preventDefault() {
 			setCancelFlag(pd(this));
 		},
+		/**
+		* The flag to indicate cancellation state.
+		* @type {boolean}
+		*/
 		get defaultPrevented() {
 			return pd(this).canceled;
 		},
+		/**
+		* The flag to be composed.
+		* @type {boolean}
+		*/
 		get composed() {
 			return Boolean(pd(this).event.composed);
 		},
+		/**
+		* The unix time of this event.
+		* @type {number}
+		*/
 		get timeStamp() {
 			return pd(this).timeStamp;
 		},
+		/**
+		* The target of this event.
+		* @type {EventTarget}
+		* @deprecated
+		*/
 		get srcElement() {
 			return pd(this).eventTarget;
 		},
+		/**
+		* The flag to stop event bubbling.
+		* @type {boolean}
+		* @deprecated
+		*/
 		get cancelBubble() {
 			return pd(this).stopped;
 		},
@@ -48799,12 +48925,24 @@ var init_event_target_shim = __esmMin((() => {
 			data.stopped = true;
 			if (typeof data.event.cancelBubble === "boolean") data.event.cancelBubble = true;
 		},
+		/**
+		* The flag to indicate cancellation state.
+		* @type {boolean}
+		* @deprecated
+		*/
 		get returnValue() {
 			return !pd(this).canceled;
 		},
 		set returnValue(value) {
 			if (!value) setCancelFlag(pd(this));
 		},
+		/**
+		* Initialize this event object. But do nothing under event dispatching.
+		* @param {string} type The event type.
+		* @param {boolean} [bubbles=false] The flag to be possible to bubble up.
+		* @param {boolean} [cancelable=false] The flag to be possible to cancel.
+		* @deprecated
+		*/
 		initEvent() {}
 	};
 	Object.defineProperty(Event.prototype, "constructor", {
@@ -48821,6 +48959,13 @@ var init_event_target_shim = __esmMin((() => {
 	BUBBLE = 2;
 	ATTRIBUTE = 3;
 	EventTarget.prototype = {
+		/**
+		* Add a given listener to this event target.
+		* @param {string} eventName The event name to add.
+		* @param {Function} listener The listener to add.
+		* @param {boolean|{capture?:boolean,passive?:boolean,once?:boolean}} [options] The options for this listener.
+		* @returns {void}
+		*/
 		addEventListener(eventName, listener, options) {
 			if (listener == null) return;
 			if (typeof listener !== "function" && !isObject(listener)) throw new TypeError("'listener' should be a function or an object.");
@@ -48847,6 +48992,13 @@ var init_event_target_shim = __esmMin((() => {
 			}
 			prev.next = newNode;
 		},
+		/**
+		* Remove a given listener from this event target.
+		* @param {string} eventName The event name to remove.
+		* @param {Function} listener The listener to remove.
+		* @param {boolean|{capture?:boolean,passive?:boolean,once?:boolean}} [options] The options for this listener.
+		* @returns {void}
+		*/
 		removeEventListener(eventName, listener, options) {
 			if (listener == null) return;
 			const listeners = getListeners(this);
@@ -48864,6 +49016,11 @@ var init_event_target_shim = __esmMin((() => {
 				node = node.next;
 			}
 		},
+		/**
+		* Dispatch a given event.
+		* @param {Event|{type:string}} event The event to dispatch.
+		* @returns {boolean} `false` if canceled.
+		*/
 		dispatchEvent(event) {
 			if (event == null || typeof event.type !== "string") throw new TypeError("\"event.type\" should be a string.");
 			const listeners = getListeners(this);
@@ -61623,13 +61780,37 @@ var require_unix_stat = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	* https://github.com/archiverjs/node-compress-commons/blob/master/LICENSE-MIT
 	*/
 	module.exports = {
+		/**
+		* Bits used for permissions (and sticky bit)
+		*/
 		PERM_MASK: 4095,
+		/**
+		* Bits used to indicate the filesystem object type.
+		*/
 		FILE_TYPE_FLAG: 61440,
+		/**
+		* Indicates symbolic links.
+		*/
 		LINK_FLAG: 40960,
+		/**
+		* Indicates plain files.
+		*/
 		FILE_FLAG: 32768,
+		/**
+		* Indicates directories.
+		*/
 		DIR_FLAG: 16384,
+		/**
+		* Default permissions for symbolic links.
+		*/
 		DEFAULT_LINK_PERM: 511,
+		/**
+		* Default permissions for directories.
+		*/
 		DEFAULT_DIR_PERM: 493,
+		/**
+		* Default permissions for plain files.
+		*/
 		DEFAULT_FILE_PERM: 420
 	};
 }));
@@ -70404,6 +70585,11 @@ var require_anchors = /* @__PURE__ */ __commonJSMin(((exports) => {
 				prevAnchors.add(anchor);
 				return anchor;
 			},
+			/**
+			* With circular references, the source node is only resolved after all
+			* of its child nodes are. This is why anchors are set only after all of
+			* the nodes have been created.
+			*/
 			setAnchors: () => {
 				for (const source of aliasObjects) {
 					const ref = sourceObjects.get(source);
@@ -72160,6 +72346,14 @@ var require_binary = /* @__PURE__ */ __commonJSMin(((exports) => {
 		identify: (value) => value instanceof Uint8Array,
 		default: false,
 		tag: "tag:yaml.org,2002:binary",
+		/**
+		* Returns a Buffer in node and an Uint8Array in browsers
+		*
+		* To use the resulting buffer as an image, you'll want to do something like:
+		*
+		*   const blob = new Blob([buffer], { type: 'image/jpeg' })
+		*   document.querySelector('#photo').src = URL.createObjectURL(blob)
+		*/
 		resolve(src, onError) {
 			if (typeof node_buffer.Buffer === "function") return node_buffer.Buffer.from(src, "base64");
 			else if (typeof atob === "function") {
