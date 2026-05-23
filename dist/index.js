@@ -1172,7 +1172,7 @@ function expand(template, context) {
 	if (template === "/") return template;
 	else return template.replace(/\/$/, "");
 }
-function parse$1(options) {
+function parse$2(options) {
 	let method = options.method.toUpperCase();
 	let url = (options.url || "/").replace(/:([a-z]\w+)/g, "{$1}");
 	let headers = Object.assign({}, options.headers);
@@ -1209,7 +1209,7 @@ function parse$1(options) {
 	}, typeof body !== "undefined" ? { body } : null, options.request ? { request: options.request } : null);
 }
 function endpointWithDefaults(defaults, route, options) {
-	return parse$1(merge(defaults, route, options));
+	return parse$2(merge(defaults, route, options));
 }
 function withDefaults$2(oldDefaults, newDefaults) {
 	const DEFAULTS2 = merge(oldDefaults, newDefaults);
@@ -1218,121 +1218,130 @@ function withDefaults$2(oldDefaults, newDefaults) {
 		DEFAULTS: DEFAULTS2,
 		defaults: withDefaults$2.bind(null, DEFAULTS2),
 		merge: merge.bind(null, DEFAULTS2),
-		parse: parse$1
+		parse: parse$2
 	});
 }
 var endpoint = withDefaults$2(null, DEFAULTS);
+/*!
+* content-type
+* Copyright(c) 2015 Douglas Christopher Wilson
+* MIT Licensed
+*/
 //#endregion
 //#region node_modules/json-with-bigint/json-with-bigint.js
-var import_fast_content_type_parse = (/* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var NullObject = function NullObject() {};
-	NullObject.prototype = Object.create(null);
+var import_dist$3 = (/* @__PURE__ */ __commonJSMin(((exports) => {
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.parse = parse;
 	/**
-	* RegExp to match *( ";" parameter ) in RFC 7231 sec 3.1.1.1
-	*
-	* parameter     = token "=" ( token / quoted-string )
-	* token         = 1*tchar
-	* tchar         = "!" / "#" / "$" / "%" / "&" / "'" / "*"
-	*               / "+" / "-" / "." / "^" / "_" / "`" / "|" / "~"
-	*               / DIGIT / ALPHA
-	*               ; any VCHAR, except delimiters
-	* quoted-string = DQUOTE *( qdtext / quoted-pair ) DQUOTE
-	* qdtext        = HTAB / SP / %x21 / %x23-5B / %x5D-7E / obs-text
-	* obs-text      = %x80-FF
-	* quoted-pair   = "\" ( HTAB / SP / VCHAR / obs-text )
+	* Null object perf optimization. Faster than `Object.create(null)` and `{ __proto__: null }`.
 	*/
-	var paramRE = /; *([!#$%&'*+.^\w`|~-]+)=("(?:[\v\u0020\u0021\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\v\u0020-\u00ff])*"|[!#$%&'*+.^\w`|~-]+) */gu;
+	var NullObject = /* @__PURE__ */ (() => {
+		const C = function() {};
+		C.prototype = Object.create(null);
+		return C;
+	})();
 	/**
-	* RegExp to match quoted-pair in RFC 7230 sec 3.2.6
-	*
-	* quoted-pair = "\" ( HTAB / SP / VCHAR / obs-text )
-	* obs-text    = %x80-FF
+	* Parse a `Content-Type` header.
 	*/
-	var quotedPairRE = /\\([\v\u0020-\u00ff])/gu;
-	/**
-	* RegExp to match type in RFC 7231 sec 3.1.1.1
-	*
-	* media-type = type "/" subtype
-	* type       = token
-	* subtype    = token
-	*/
-	var mediaTypeRE = /^[!#$%&'*+.^\w|~-]+\/[!#$%&'*+.^\w|~-]+$/u;
-	var defaultContentType = {
-		type: "",
-		parameters: new NullObject()
-	};
-	Object.freeze(defaultContentType.parameters);
-	Object.freeze(defaultContentType);
-	/**
-	* Parse media type to object.
-	*
-	* @param {string|object} header
-	* @return {Object}
-	* @public
-	*/
-	function parse(header) {
-		if (typeof header !== "string") throw new TypeError("argument header is required and must be a string");
-		let index = header.indexOf(";");
-		const type = index !== -1 ? header.slice(0, index).trim() : header.trim();
-		if (mediaTypeRE.test(type) === false) throw new TypeError("invalid media type");
-		const result = {
-			type: type.toLowerCase(),
-			parameters: new NullObject()
+	function parse(header, options) {
+		const len = header.length;
+		let index = skipOWS(header, 0, len);
+		const valueStart = index;
+		index = skipValue(header, index, len);
+		const valueEnd = trailingOWS(header, valueStart, index);
+		return {
+			type: header.slice(valueStart, valueEnd).toLowerCase(),
+			parameters: options?.parameters === false ? new NullObject() : parseParameters(header, index, len)
 		};
-		if (index === -1) return result;
-		let key;
-		let match;
-		let value;
-		paramRE.lastIndex = index;
-		while (match = paramRE.exec(header)) {
-			if (match.index !== index) throw new TypeError("invalid parameter format");
-			index += match[0].length;
-			key = match[1].toLowerCase();
-			value = match[2];
-			if (value[0] === "\"") {
-				value = value.slice(1, value.length - 1);
-				quotedPairRE.test(value) && (value = value.replace(quotedPairRE, "$1"));
-			}
-			result.parameters[key] = value;
-		}
-		if (index !== header.length) throw new TypeError("invalid parameter format");
-		return result;
 	}
-	function safeParse(header) {
-		if (typeof header !== "string") return defaultContentType;
-		let index = header.indexOf(";");
-		const type = index !== -1 ? header.slice(0, index).trim() : header.trim();
-		if (mediaTypeRE.test(type) === false) return defaultContentType;
-		const result = {
-			type: type.toLowerCase(),
-			parameters: new NullObject()
-		};
-		if (index === -1) return result;
-		let key;
-		let match;
-		let value;
-		paramRE.lastIndex = index;
-		while (match = paramRE.exec(header)) {
-			if (match.index !== index) return defaultContentType;
-			index += match[0].length;
-			key = match[1].toLowerCase();
-			value = match[2];
-			if (value[0] === "\"") {
-				value = value.slice(1, value.length - 1);
-				quotedPairRE.test(value) && (value = value.replace(quotedPairRE, "$1"));
+	var SP = 32;
+	var HTAB = 9;
+	var SEMI = 59;
+	var EQ = 61;
+	var DQUOTE = 34;
+	var BSLASH = 92;
+	/**
+	* Parses the parameters of a `Content-Type` header starting at the given index.
+	*/
+	function parseParameters(header, index, len) {
+		const parameters = new NullObject();
+		parameter: while (index < len) {
+			index = skipOWS(header, index + 1, len);
+			const keyStart = index;
+			while (index < len) {
+				const code = header.charCodeAt(index);
+				if (code === SEMI) continue parameter;
+				if (code === EQ) {
+					const keyEnd = trailingOWS(header, keyStart, index);
+					const key = header.slice(keyStart, keyEnd).toLowerCase();
+					index = skipOWS(header, index + 1, len);
+					if (index < len && header.charCodeAt(index) === DQUOTE) {
+						index++;
+						let value = "";
+						while (index < len) {
+							const code = header.charCodeAt(index++);
+							if (code === DQUOTE) {
+								index = skipValue(header, index, len);
+								if (parameters[key] === void 0) parameters[key] = value;
+								break;
+							}
+							if (code === BSLASH && index < len) {
+								value += header[index++];
+								continue;
+							}
+							value += String.fromCharCode(code);
+						}
+						continue parameter;
+					}
+					const valueStart = index;
+					index = skipValue(header, index, len);
+					if (parameters[key] === void 0) {
+						const valueEnd = trailingOWS(header, valueStart, index);
+						parameters[key] = header.slice(valueStart, valueEnd);
+					}
+					continue parameter;
+				}
+				index++;
 			}
-			result.parameters[key] = value;
 		}
-		if (index !== header.length) return defaultContentType;
-		return result;
+		return parameters;
 	}
-	module.exports.default = {
-		parse,
-		safeParse
-	};
-	module.exports.parse = parse;
-	module.exports.safeParse = safeParse;
-	module.exports.defaultContentType = defaultContentType;
+	/**
+	* Skip over characters until a semicolon.
+	*/
+	function skipValue(str, index, len) {
+		while (index < len) {
+			if (str.charCodeAt(index) === SEMI) break;
+			index++;
+		}
+		return index;
+	}
+	/**
+	* Skip optional whitespace (OWS) in an HTTP header value.
+	*
+	* OWS is defined in RFC 9110 sec 5.6.3 as SP (" ") or HTAB ("\t").
+	*/
+	function skipOWS(header, index, len) {
+		while (index < len) {
+			const char = header.charCodeAt(index);
+			if (char !== SP && char !== HTAB) break;
+			index++;
+		}
+		return index;
+	}
+	/**
+	* Trim optional whitespace (OWS) from the end of a substring.
+	*
+	* OWS is defined in RFC 9110 sec 5.6.3 as SP (" ") or HTAB ("\t").
+	*/
+	function trailingOWS(header, start, end) {
+		while (end > start) {
+			const char = header.charCodeAt(end - 1);
+			if (char !== SP && char !== HTAB) break;
+			end--;
+		}
+		return end;
+	}
 })))();
 var intRegex = /^-?\d+$/;
 var noiseValue = /^-?\d+n+$/;
@@ -1499,7 +1508,7 @@ var RequestError = class extends Error {
 };
 //#endregion
 //#region node_modules/@octokit/request/dist-bundle/index.js
-var defaults_default = { headers: { "user-agent": `octokit-request.js/10.0.8 ${getUserAgent()}` } };
+var defaults_default = { headers: { "user-agent": `octokit-request.js/10.0.9 ${getUserAgent()}` } };
 function isPlainObject(value) {
 	if (typeof value !== "object" || value === null) return false;
 	if (Object.prototype.toString.call(value) !== "[object Object]") return false;
@@ -1586,7 +1595,7 @@ async function fetchWrapper(requestOptions) {
 async function getResponseData(response) {
 	const contentType = response.headers.get("content-type");
 	if (!contentType) return response.text().catch(noop$1);
-	const mimetype = (0, import_fast_content_type_parse.safeParse)(contentType);
+	const mimetype = (0, import_dist$3.parse)(contentType);
 	if (isJSONResponse(mimetype)) {
 		let text = "";
 		try {
@@ -15901,11 +15910,49 @@ var XmlNode = class {
 	}
 };
 //#endregion
+//#region node_modules/xml-naming/src/index.js
+/**
+* xml-naming
+* Validates XML Name productions as defined in the XML 1.0 and 1.1 specifications.
+* Covers: Name, NCName, QName, NMToken, NMTokens
+*
+* XML 1.0 spec: https://www.w3.org/TR/xml/#NT-Name
+* XML 1.1 spec: https://www.w3.org/TR/xml11/#NT-NameStartChar
+* XML NS spec:  https://www.w3.org/TR/xml-names/#NT-NCName
+*/
+var nameStartChar10 = ":A-Za-z_À-ÖØ-öø-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�";
+var nameChar10 = nameStartChar10 + "\\-\\.\\d·̀-ͯ‿-⁀";
+var nameStartChar11 = ":A-Za-z_À-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�𐀀-󯿿";
+var nameChar11 = nameStartChar11 + "\\-\\.\\d·̀-ͯ҇‿-⁀";
+var buildRegexes = (startChar, char, flags = "") => {
+	const ncNamePat = `[${startChar.replace(":", "")}][${char.replace(":", "")}]*`;
+	return {
+		name: new RegExp(`^[${startChar}][${char}]*$`, flags),
+		ncName: new RegExp(`^${ncNamePat}$`, flags),
+		qName: new RegExp(`^${ncNamePat}(?::${ncNamePat})?$`, flags),
+		nmToken: new RegExp(`^[${char}]+$`, flags),
+		nmTokens: new RegExp(`^[${char}]+(?:\\s+[${char}]+)*$`, flags)
+	};
+};
+var regexes10 = buildRegexes(nameStartChar10, nameChar10);
+var regexes11 = buildRegexes(nameStartChar11, nameChar11, "u");
+var getRegexes = (xmlVersion = "1.0") => xmlVersion === "1.1" ? regexes11 : regexes10;
+/**
+* Returns true if the string is a valid QName (Qualified Name).
+* Allows exactly one colon as a prefix separator: prefix:localName.
+* Used for: element and attribute names in namespace-aware XML/SVG.
+*/
+var qName = (str, { xmlVersion = "1.0" } = {}) => getRegexes(xmlVersion).qName.test(str);
+//#endregion
 //#region node_modules/fast-xml-parser/src/xmlparser/DocTypeReader.js
 var DocTypeReader = class {
-	constructor(options) {
+	constructor(options, xmlVersion) {
 		this.suppressValidationErr = !options;
 		this.options = options;
+		this.xmlVersion = xmlVersion || 1;
+	}
+	setXmlVersion(xmlVersion = 1) {
+		this.xmlVersion = xmlVersion;
 	}
 	readDocType(xmlData, i) {
 		const entities = Object.create(null);
@@ -15960,7 +16007,7 @@ var DocTypeReader = class {
 		const startIndex = i;
 		while (i < xmlData.length && !/\s/.test(xmlData[i]) && xmlData[i] !== "\"" && xmlData[i] !== "'") i++;
 		let entityName = xmlData.substring(startIndex, i);
-		validateEntityName(entityName);
+		validateEntityName(entityName, { xmlVersion: this.xmlVersion });
 		i = skipWhitespace(xmlData, i);
 		if (!this.suppressValidationErr) {
 			if (xmlData.substring(i, i + 6).toUpperCase() === "SYSTEM") throw new Error("External entities are not supported");
@@ -15981,7 +16028,7 @@ var DocTypeReader = class {
 		const startIndex = i;
 		while (i < xmlData.length && !/\s/.test(xmlData[i])) i++;
 		let notationName = xmlData.substring(startIndex, i);
-		!this.suppressValidationErr && validateEntityName(notationName);
+		!this.suppressValidationErr && validateEntityName(notationName, { xmlVersion: this.xmlVersion });
 		i = skipWhitespace(xmlData, i);
 		const identifierType = xmlData.substring(i, i + 6).toUpperCase();
 		if (!this.suppressValidationErr && identifierType !== "SYSTEM" && identifierType !== "PUBLIC") throw new Error(`Expected SYSTEM or PUBLIC, found "${identifierType}"`);
@@ -16021,7 +16068,7 @@ var DocTypeReader = class {
 		const startIndex = i;
 		while (i < xmlData.length && !/\s/.test(xmlData[i])) i++;
 		let elementName = xmlData.substring(startIndex, i);
-		if (!this.suppressValidationErr && !isName(elementName)) throw new Error(`Invalid element name: "${elementName}"`);
+		if (!this.suppressValidationErr && !qName(elementName, { xmlVersion: this.xmlVersion })) throw new Error(`Invalid element name: "${elementName}"`);
 		i = skipWhitespace(xmlData, i);
 		let contentModel = "";
 		if (xmlData[i] === "E" && hasSeq(xmlData, "MPTY", i)) i += 4;
@@ -16044,12 +16091,12 @@ var DocTypeReader = class {
 		let startIndex = i;
 		while (i < xmlData.length && !/\s/.test(xmlData[i])) i++;
 		let elementName = xmlData.substring(startIndex, i);
-		validateEntityName(elementName);
+		validateEntityName(elementName, { xmlVersion: this.xmlVersion });
 		i = skipWhitespace(xmlData, i);
 		startIndex = i;
 		while (i < xmlData.length && !/\s/.test(xmlData[i])) i++;
 		let attributeName = xmlData.substring(startIndex, i);
-		if (!validateEntityName(attributeName)) throw new Error(`Invalid attribute name: "${attributeName}"`);
+		if (!validateEntityName(attributeName, { xmlVersion: this.xmlVersion })) throw new Error(`Invalid attribute name: "${attributeName}"`);
 		i = skipWhitespace(xmlData, i);
 		let attributeType = "";
 		if (xmlData.substring(i, i + 8).toUpperCase() === "NOTATION") {
@@ -16064,7 +16111,7 @@ var DocTypeReader = class {
 				while (i < xmlData.length && xmlData[i] !== "|" && xmlData[i] !== ")") i++;
 				let notation = xmlData.substring(startIndex, i);
 				notation = notation.trim();
-				if (!validateEntityName(notation)) throw new Error(`Invalid notation name: "${notation}"`);
+				if (!validateEntityName(notation, { xmlVersion: this.xmlVersion })) throw new Error(`Invalid notation name: "${notation}"`);
 				allowedNotations.push(notation);
 				if (xmlData[i] === "|") {
 					i++;
@@ -16115,16 +16162,20 @@ function hasSeq(data, seq, i) {
 	for (let j = 0; j < seq.length; j++) if (seq[j] !== data[i + j + 1]) return false;
 	return true;
 }
-function validateEntityName(name) {
-	if (isName(name)) return name;
+function validateEntityName(name, xmlVersion) {
+	if (qName(name, { xmlVersion })) return name;
 	else throw new Error(`Invalid entity name ${name}`);
 }
 //#endregion
 //#region node_modules/strnum/strnum.js
 var hexRegex = /^[-+]?0x[a-fA-F0-9]+$/;
+var binRegex = /^0b[01]+$/;
+var octRegex = /^0o[0-7]+$/;
 var numRegex = /^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/;
 var consider = {
 	hex: true,
+	binary: false,
+	octal: false,
 	leadingZeros: true,
 	decimalPoint: ".",
 	eNotation: true,
@@ -16138,6 +16189,8 @@ function toNumber(str, options = {}) {
 	else if (options.skipLike !== void 0 && options.skipLike.test(trimmedStr)) return str;
 	else if (trimmedStr === "0") return 0;
 	else if (options.hex && hexRegex.test(trimmedStr)) return parse_int(trimmedStr, 16);
+	else if (options.binary && binRegex.test(trimmedStr)) return parse_int(trimmedStr, 2);
+	else if (options.octal && octRegex.test(trimmedStr)) return parse_int(trimmedStr, 8);
 	else if (!isFinite(trimmedStr)) return handleInfinity(str, Number(trimmedStr), options);
 	else if (trimmedStr.includes("e") || trimmedStr.includes("E")) return resolveEnotation(str, trimmedStr, options);
 	else {
@@ -16199,6 +16252,8 @@ function trimZeros(numStr) {
 	return numStr;
 }
 function parse_int(numStr, base) {
+	const str = numStr.trim();
+	if (base === 2 || base === 8) numStr = str.substring(2);
 	if (parseInt) return parseInt(numStr, base);
 	else if (Number.parseInt) return Number.parseInt(numStr, base);
 	else if (window && window.parseInt) return window.parseInt(numStr, base);
@@ -17022,7 +17077,7 @@ function extractNamespace(rawTagName) {
 	}
 }
 var OrderedObjParser = class {
-	constructor(options) {
+	constructor(options, externalEntities) {
 		this.options = options;
 		this.currentNode = null;
 		this.tagsNodeStack = [];
@@ -17047,7 +17102,10 @@ var OrderedObjParser = class {
 				...CURRENCY
 			};
 			this.entityDecoder = new EntityDecoder({
-				namedEntities,
+				namedEntities: {
+					...namedEntities,
+					...externalEntities
+				},
 				numericAllowed: this.options.htmlEntities,
 				limit: {
 					maxTotalExpansions: this.options.processEntities.maxTotalExpansions,
@@ -17151,7 +17209,7 @@ function buildAttributesMap(attrStr, jPath, tagName, force = false) {
 			}
 		}
 		if (!hasAttrs) return;
-		if (options.attributesGroupName) {
+		if (options.attributesGroupName && !options.preserveOrder) {
 			const attrCollection = {};
 			attrCollection[options.attributesGroupName] = attrs;
 			return attrCollection;
@@ -17201,6 +17259,7 @@ var parseXml = function(xmlData) {
 			if (attsMap) {
 				const ver = attsMap[this.options.attributeNamePrefix + "version"];
 				this.entityDecoder.setXmlVersion(Number(ver) || 1);
+				docTypeReader.setXmlVersion(Number(ver) || 1);
 			}
 			if (options.ignoreDeclaration && tagData.tagName === "?xml" || options.ignorePiTags) {} else {
 				const childNode = new XmlNode(tagData.tagName);
@@ -17369,29 +17428,35 @@ function isItStopNode() {
 */
 function tagExpWithClosingIndex(xmlData, i, closingChar = ">") {
 	let attrBoundary = 0;
-	const chars = [];
 	const len = xmlData.length;
 	const closeCode0 = closingChar.charCodeAt(0);
 	const closeCode1 = closingChar.length > 1 ? closingChar.charCodeAt(1) : -1;
+	let result = "";
+	let segmentStart = i;
 	for (let index = i; index < len; index++) {
 		const code = xmlData.charCodeAt(index);
 		if (attrBoundary) {
 			if (code === attrBoundary) attrBoundary = 0;
 		} else if (code === 34 || code === 39) attrBoundary = code;
 		else if (code === closeCode0) if (closeCode1 !== -1) {
-			if (xmlData.charCodeAt(index + 1) === closeCode1) return {
-				data: String.fromCharCode(...chars),
+			if (xmlData.charCodeAt(index + 1) === closeCode1) {
+				result += xmlData.substring(segmentStart, index);
+				return {
+					data: result,
+					index
+				};
+			}
+		} else {
+			result += xmlData.substring(segmentStart, index);
+			return {
+				data: result,
 				index
 			};
-		} else return {
-			data: String.fromCharCode(...chars),
-			index
-		};
-		else if (code === 9) {
-			chars.push(32);
-			continue;
 		}
-		chars.push(code);
+		else if (code === 9 && !attrBoundary) {
+			result += xmlData.substring(segmentStart, index) + " ";
+			segmentStart = index + 1;
+		}
 	}
 }
 function findClosingIndex(xmlData, str, i, errMsg) {
@@ -17458,7 +17523,7 @@ function readStopNodeData(xmlData, tagName, i) {
 		else if (c1 === 33 && xmlData.charCodeAt(i + 2) === 45 && xmlData.charCodeAt(i + 3) === 45) i = findClosingIndex(xmlData, "-->", i + 3, "StopNode is not closed.");
 		else if (c1 === 33 && xmlData.charCodeAt(i + 2) === 91) i = findClosingIndex(xmlData, "]]>", i, "StopNode is not closed.") - 2;
 		else {
-			const tagData = readTagExp(xmlData, i, ">");
+			const tagData = readTagExp(xmlData, i, false);
 			if (tagData) {
 				if ((tagData && tagData.tagName) === tagName && tagData.tagExp[tagData.tagExp.length - 1] !== "/") openTagCount++;
 				i = tagData.closeIndex;
@@ -17543,6 +17608,7 @@ function compress(arr, options, matcher, readonlyMatcher) {
 		else if (tagObj[property]) {
 			let val = compress(tagObj[property], options, matcher, readonlyMatcher);
 			const isLeaf = isLeafTag(val, options);
+			if (Object.keys(val).length === 0 && options.alwaysCreateTextNode) val[options.textNodeName] = "";
 			if (tagObj[":@"]) assignAttributes(val, tagObj[":@"], readonlyMatcher, options);
 			else if (Object.keys(val).length === 1 && val[options.textNodeName] !== void 0 && !options.alwaysCreateTextNode) val = val[options.textNodeName];
 			else if (Object.keys(val).length === 0) if (options.alwaysCreateTextNode) val[options.textNodeName] = "";
@@ -17611,8 +17677,7 @@ var XMLParser = class {
 			const result = validate(xmlData, validationOption);
 			if (result !== true) throw Error(`${result.err.msg}:${result.err.line}:${result.err.col}`);
 		}
-		const orderedObjParser = new OrderedObjParser(this.options);
-		orderedObjParser.entityDecoder.setExternalEntities(this.externalEntities);
+		const orderedObjParser = new OrderedObjParser(this.options, this.externalEntities);
 		const orderedResult = orderedObjParser.parseXml(xmlData);
 		if (this.options.preserveOrder || orderedResult === void 0) return orderedResult;
 		else return prettify(orderedResult, this.options, orderedObjParser.matcher, orderedObjParser.readonlyMatcher);
@@ -17643,27 +17708,78 @@ var XMLParser = class {
 	}
 };
 //#endregion
+//#region node_modules/fast-xml-builder/src/util.js
+function safeComment(val) {
+	return String(val).replace(/--/g, "- -").replace(/--/g, "- -").replace(/-$/, "- ");
+}
+function safeCdata(val) {
+	return String(val).replace(/\]\]>/g, "]]]]><![CDATA[>");
+}
+function escapeAttribute(val) {
+	return String(val).replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+}
+//#endregion
 //#region node_modules/fast-xml-builder/src/orderedJs2Xml.js
 var EOL$2 = "\n";
 /**
-* 
-* @param {array} jArray 
-* @param {any} options 
-* @returns 
+* Detect XML version from the first element of the ordered array input.
+* The first element must be a ?xml processing instruction with a version attribute.
+* Returns '1.0' if not found.
+*
+* @param {array}  jArray
+* @param {object} options
+*/
+function detectXmlVersionFromArray(jArray, options) {
+	if (!Array.isArray(jArray) || jArray.length === 0) return "1.0";
+	const first = jArray[0];
+	if (propName(first) === "?xml") {
+		const attrs = first[":@"];
+		if (attrs) {
+			const versionKey = options.attributeNamePrefix + "version";
+			if (attrs[versionKey]) return attrs[versionKey];
+		}
+	}
+	return "1.0";
+}
+/**
+* Resolve a tag or attribute name through sanitizeName if configured.
+* Validation via xml-naming's qName is performed first; the sanitizeName
+* callback is invoked only when the name is invalid. If sanitizeName is
+* false (default), no validation occurs and the name is used as-is.
+*
+* @param {string}  name        - raw name from the JS object
+* @param {boolean} isAttribute - true when resolving an attribute name
+* @param {object}  options
+* @param {Matcher} matcher     - current matcher state (readonly from callback perspective)
+* @param {string}  xmlVersion  - '1.0' or '1.1', forwarded to xml-naming
+*/
+function resolveTagName$1(name, isAttribute, options, matcher, xmlVersion) {
+	if (!options.sanitizeName) return name;
+	if (qName(name, { xmlVersion })) return name;
+	return options.sanitizeName(name, {
+		isAttribute,
+		matcher: matcher.readOnly()
+	});
+}
+/**
+* @param {array} jArray
+* @param {any} options
+* @returns
 */
 function toXml(jArray, options) {
 	let indentation = "";
-	if (options.format && options.indentBy.length > 0) indentation = EOL$2;
+	if (options.format) indentation = EOL$2;
 	const stopNodeExpressions = [];
 	if (options.stopNodes && Array.isArray(options.stopNodes)) for (let i = 0; i < options.stopNodes.length; i++) {
 		const node = options.stopNodes[i];
 		if (typeof node === "string") stopNodeExpressions.push(new Expression(node));
 		else if (node instanceof Expression) stopNodeExpressions.push(node);
 	}
+	const xmlVersion = detectXmlVersionFromArray(jArray, options);
 	const matcher = new Matcher();
-	return arrToStr(jArray, options, indentation, matcher, stopNodeExpressions);
+	return arrToStr(jArray, options, indentation, matcher, stopNodeExpressions, xmlVersion);
 }
-function arrToStr(arr, options, indentation, matcher, stopNodeExpressions) {
+function arrToStr(arr, options, indentation, matcher, stopNodeExpressions, xmlVersion) {
 	let xmlStr = "";
 	let isPreviousElementTag = false;
 	if (options.maxNestedTags && matcher.getDepth() > options.maxNestedTags) throw new Error("Maximum nested tags exceeded");
@@ -17677,13 +17793,14 @@ function arrToStr(arr, options, indentation, matcher, stopNodeExpressions) {
 	}
 	for (let i = 0; i < arr.length; i++) {
 		const tagObj = arr[i];
-		const tagName = propName(tagObj);
-		if (tagName === void 0) continue;
+		const rawTagName = propName(tagObj);
+		if (rawTagName === void 0) continue;
+		const tagName = rawTagName === options.textNodeName || rawTagName === options.cdataPropName || rawTagName === options.commentPropName || rawTagName[0] === "?" ? rawTagName : resolveTagName$1(rawTagName, false, options, matcher, xmlVersion);
 		const attrValues = extractAttributeValues(tagObj[":@"], options);
 		matcher.push(tagName, attrValues);
 		const isStopNode = checkStopNode(matcher, stopNodeExpressions);
 		if (tagName === options.textNodeName) {
-			let tagText = tagObj[tagName];
+			let tagText = tagObj[rawTagName];
 			if (!isStopNode) {
 				tagText = options.tagValueProcessor(tagName, tagText);
 				tagText = replaceEntitiesValue(tagText, options);
@@ -17695,35 +17812,32 @@ function arrToStr(arr, options, indentation, matcher, stopNodeExpressions) {
 			continue;
 		} else if (tagName === options.cdataPropName) {
 			if (isPreviousElementTag) xmlStr += indentation;
-			const val = tagObj[tagName][0][options.textNodeName];
-			const safeVal = String(val).replace(/\]\]>/g, "]]]]><![CDATA[>");
+			const val = tagObj[rawTagName][0][options.textNodeName];
+			const safeVal = safeCdata(val);
 			xmlStr += `<![CDATA[${safeVal}]]>`;
 			isPreviousElementTag = false;
 			matcher.pop();
 			continue;
 		} else if (tagName === options.commentPropName) {
-			const val = tagObj[tagName][0][options.textNodeName];
-			const safeVal = String(val).replace(/--/g, "- -").replace(/-$/, "- ");
+			const val = tagObj[rawTagName][0][options.textNodeName];
+			const safeVal = safeComment(val);
 			xmlStr += indentation + `<!--${safeVal}-->`;
 			isPreviousElementTag = true;
 			matcher.pop();
 			continue;
 		} else if (tagName[0] === "?") {
-			const attStr = attr_to_str(tagObj[":@"], options, isStopNode);
-			const tempInd = tagName === "?xml" ? "" : indentation;
-			let piTextNodeName = tagObj[tagName][0][options.textNodeName];
-			piTextNodeName = piTextNodeName.length !== 0 ? " " + piTextNodeName : "";
-			xmlStr += tempInd + `<${tagName}${piTextNodeName}${attStr}?>`;
+			const attStr = attr_to_str(tagObj[":@"], options, isStopNode, matcher, xmlVersion);
+			xmlStr += (tagName === "?xml" ? "" : indentation) + `<${tagName}${attStr}?>`;
 			isPreviousElementTag = true;
 			matcher.pop();
 			continue;
 		}
 		let newIdentation = indentation;
 		if (newIdentation !== "") newIdentation += options.indentBy;
-		const tagStart = indentation + `<${tagName}${attr_to_str(tagObj[":@"], options, isStopNode)}`;
+		const tagStart = indentation + `<${tagName}${attr_to_str(tagObj[":@"], options, isStopNode, matcher, xmlVersion)}`;
 		let tagValue;
-		if (isStopNode) tagValue = getRawContent(tagObj[tagName], options);
-		else tagValue = arrToStr(tagObj[tagName], options, newIdentation, matcher, stopNodeExpressions);
+		if (isStopNode) tagValue = getRawContent(tagObj[rawTagName], options);
+		else tagValue = arrToStr(tagObj[rawTagName], options, newIdentation, matcher, stopNodeExpressions, xmlVersion);
 		if (options.unpairedTags.indexOf(tagName) !== -1) if (options.suppressUnpairedNode) xmlStr += tagStart + ">";
 		else xmlStr += tagStart + "/>";
 		else if ((!tagValue || tagValue.length === 0) && options.suppressEmptyNode) xmlStr += tagStart + "/>";
@@ -17750,7 +17864,7 @@ function extractAttributeValues(attrMap, options) {
 	for (let attr in attrMap) {
 		if (!Object.prototype.hasOwnProperty.call(attrMap, attr)) continue;
 		const cleanAttrName = attr.startsWith(options.attributeNamePrefix) ? attr.substr(options.attributeNamePrefix.length) : attr;
-		attrValues[cleanAttrName] = attrMap[attr];
+		attrValues[cleanAttrName] = escapeAttribute(attrMap[attr]);
 		hasAttrs = true;
 	}
 	return hasAttrs ? attrValues : null;
@@ -17790,7 +17904,7 @@ function attr_to_str_raw(attrMap, options) {
 		if (!Object.prototype.hasOwnProperty.call(attrMap, attr)) continue;
 		let attrVal = attrMap[attr];
 		if (attrVal === true && options.suppressBooleanAttributes) attrStr += ` ${attr.substr(options.attributeNamePrefix.length)}`;
-		else attrStr += ` ${attr.substr(options.attributeNamePrefix.length)}="${attrVal}"`;
+		else attrStr += ` ${attr.substr(options.attributeNamePrefix.length)}="${escapeAttribute(attrVal)}"`;
 	}
 	return attrStr;
 }
@@ -17802,18 +17916,24 @@ function propName(obj) {
 		if (key !== ":@") return key;
 	}
 }
-function attr_to_str(attrMap, options, isStopNode) {
+/**
+* Build attribute string, resolving attribute names through sanitizeName when configured.
+* Accepts matcher so the callback has path context.
+*/
+function attr_to_str(attrMap, options, isStopNode, matcher, xmlVersion) {
 	let attrStr = "";
 	if (attrMap && !options.ignoreAttributes) for (let attr in attrMap) {
 		if (!Object.prototype.hasOwnProperty.call(attrMap, attr)) continue;
+		const cleanAttrName = attr.substr(options.attributeNamePrefix.length);
+		const resolvedAttrName = isStopNode ? cleanAttrName : resolveTagName$1(cleanAttrName, true, options, matcher, xmlVersion);
 		let attrVal;
 		if (isStopNode) attrVal = attrMap[attr];
 		else {
 			attrVal = options.attributeValueProcessor(attr, attrMap[attr]);
 			attrVal = replaceEntitiesValue(attrVal, options);
 		}
-		if (attrVal === true && options.suppressBooleanAttributes) attrStr += ` ${attr.substr(options.attributeNamePrefix.length)}`;
-		else attrStr += ` ${attr.substr(options.attributeNamePrefix.length)}="${attrVal}"`;
+		if (attrVal === true && options.suppressBooleanAttributes) attrStr += ` ${resolvedAttrName}`;
+		else attrStr += ` ${resolvedAttrName}="${escapeAttribute(attrVal)}"`;
 	}
 	return attrStr;
 }
@@ -17889,7 +18009,8 @@ var defaultOptions = {
 	stopNodes: [],
 	oneListGroup: false,
 	maxNestedTags: 100,
-	jPath: true
+	jPath: true,
+	sanitizeName: false
 };
 function Builder(options) {
 	this.options = Object.assign({}, defaultOptions, options);
@@ -17924,15 +18045,53 @@ function Builder(options) {
 		this.newLine = "";
 	}
 }
+/**
+* Detect XML version from the ?xml declaration at the root of a plain-object input.
+* Checks both attributesGroupName and flat attribute forms.
+* Returns '1.0' if no declaration is found.
+*/
+function detectXmlVersionFromObj(jObj, options) {
+	const decl = jObj["?xml"];
+	if (decl && typeof decl === "object") {
+		if (options.attributesGroupName && decl[options.attributesGroupName]) {
+			const v = decl[options.attributesGroupName][options.attributeNamePrefix + "version"];
+			if (v) return v;
+		}
+		const v = decl[options.attributeNamePrefix + "version"];
+		if (v) return v;
+	}
+	return "1.0";
+}
+/**
+* Resolve a tag or attribute name through sanitizeName if configured.
+* Validation via xml-naming's qName is performed first; the sanitizeName
+* callback is invoked only when the name is invalid. If sanitizeName is
+* false (default), no validation occurs and the name is used as-is.
+*
+* @param {string}  name        - raw name from the JS object
+* @param {boolean} isAttribute - true when resolving an attribute name
+* @param {object}  options
+* @param {Matcher} matcher     - current matcher state (readonly from callback perspective)
+* @param {string}  xmlVersion  - '1.0' or '1.1', forwarded to xml-naming
+*/
+function resolveTagName(name, isAttribute, options, matcher, xmlVersion) {
+	if (!options.sanitizeName) return name;
+	if (qName(name, { xmlVersion })) return name;
+	return options.sanitizeName(name, {
+		isAttribute,
+		matcher: matcher.readOnly()
+	});
+}
 Builder.prototype.build = function(jObj) {
 	if (this.options.preserveOrder) return toXml(jObj, this.options);
 	else {
 		if (Array.isArray(jObj) && this.options.arrayNodeName && this.options.arrayNodeName.length > 1) jObj = { [this.options.arrayNodeName]: jObj };
 		const matcher = new Matcher();
-		return this.j2x(jObj, 0, matcher).val;
+		const xmlVersion = detectXmlVersionFromObj(jObj, this.options);
+		return this.j2x(jObj, 0, matcher, xmlVersion).val;
 	}
 };
-Builder.prototype.j2x = function(jObj, level, matcher) {
+Builder.prototype.j2x = function(jObj, level, matcher, xmlVersion) {
 	let attrStr = "";
 	let val = "";
 	if (this.options.maxNestedTags && matcher.getDepth() >= this.options.maxNestedTags) throw new Error("Maximum nested tags exceeded");
@@ -17940,28 +18099,31 @@ Builder.prototype.j2x = function(jObj, level, matcher) {
 	const isCurrentStopNode = this.checkStopNode(matcher);
 	for (let key in jObj) {
 		if (!Object.prototype.hasOwnProperty.call(jObj, key)) continue;
+		const resolvedKey = key === this.options.textNodeName || key === this.options.cdataPropName || key === this.options.commentPropName || this.options.attributesGroupName && key === this.options.attributesGroupName || this.isAttribute(key) || key[0] === "?" ? key : resolveTagName(key, false, this.options, matcher, xmlVersion);
 		if (typeof jObj[key] === "undefined") {
 			if (this.isAttribute(key)) val += "";
 		} else if (jObj[key] === null) if (this.isAttribute(key)) val += "";
-		else if (key === this.options.cdataPropName) val += "";
-		else if (key[0] === "?") val += this.indentate(level) + "<" + key + "?" + this.tagEndChar;
-		else val += this.indentate(level) + "<" + key + "/" + this.tagEndChar;
-		else if (jObj[key] instanceof Date) val += this.buildTextValNode(jObj[key], key, "", level, matcher);
+		else if (resolvedKey === this.options.cdataPropName || resolvedKey === this.options.commentPropName) val += "";
+		else if (resolvedKey[0] === "?") val += this.indentate(level) + "<" + resolvedKey + "?" + this.tagEndChar;
+		else val += this.indentate(level) + "<" + resolvedKey + "/" + this.tagEndChar;
+		else if (jObj[key] instanceof Date) val += this.buildTextValNode(jObj[key], resolvedKey, "", level, matcher);
 		else if (typeof jObj[key] !== "object") {
 			const attr = this.isAttribute(key);
-			if (attr && !this.ignoreAttributesFn(attr, jPath)) attrStr += this.buildAttrPairStr(attr, "" + jObj[key], isCurrentStopNode);
-			else if (!attr) if (key === this.options.textNodeName) {
+			if (attr && !this.ignoreAttributesFn(attr, jPath)) {
+				const resolvedAttr = resolveTagName(attr, true, this.options, matcher, xmlVersion);
+				attrStr += this.buildAttrPairStr(resolvedAttr, "" + jObj[key], isCurrentStopNode);
+			} else if (!attr) if (key === this.options.textNodeName) {
 				let newval = this.options.tagValueProcessor(key, "" + jObj[key]);
 				val += this.replaceEntitiesValue(newval);
 			} else {
-				matcher.push(key);
+				matcher.push(resolvedKey);
 				const isStopNode = this.checkStopNode(matcher);
 				matcher.pop();
 				if (isStopNode) {
 					const textValue = "" + jObj[key];
-					if (textValue === "") val += this.indentate(level) + "<" + key + this.closeTag(key) + this.tagEndChar;
-					else val += this.indentate(level) + "<" + key + ">" + textValue + "</" + key + this.tagEndChar;
-				} else val += this.buildTextValNode(jObj[key], key, "", level, matcher);
+					if (textValue === "") val += this.indentate(level) + "<" + resolvedKey + this.closeTag(resolvedKey) + this.tagEndChar;
+					else val += this.indentate(level) + "<" + resolvedKey + ">" + textValue + "</" + resolvedKey + this.tagEndChar;
+				} else val += this.buildTextValNode(jObj[key], resolvedKey, "", level, matcher);
 			}
 		} else if (Array.isArray(jObj[key])) {
 			const arrLen = jObj[key].length;
@@ -17969,37 +18131,40 @@ Builder.prototype.j2x = function(jObj, level, matcher) {
 			let listTagAttr = "";
 			for (let j = 0; j < arrLen; j++) {
 				const item = jObj[key][j];
-				if (typeof item === "undefined") {} else if (item === null) if (key[0] === "?") val += this.indentate(level) + "<" + key + "?" + this.tagEndChar;
-				else val += this.indentate(level) + "<" + key + "/" + this.tagEndChar;
+				if (typeof item === "undefined") {} else if (item === null) if (resolvedKey[0] === "?") val += this.indentate(level) + "<" + resolvedKey + "?" + this.tagEndChar;
+				else val += this.indentate(level) + "<" + resolvedKey + "/" + this.tagEndChar;
 				else if (typeof item === "object") if (this.options.oneListGroup) {
-					matcher.push(key);
-					const result = this.j2x(item, level + 1, matcher);
+					matcher.push(resolvedKey);
+					const result = this.j2x(item, level + 1, matcher, xmlVersion);
 					matcher.pop();
 					listTagVal += result.val;
 					if (this.options.attributesGroupName && item.hasOwnProperty(this.options.attributesGroupName)) listTagAttr += result.attrStr;
-				} else listTagVal += this.processTextOrObjNode(item, key, level, matcher);
+				} else listTagVal += this.processTextOrObjNode(item, resolvedKey, level, matcher, xmlVersion);
 				else if (this.options.oneListGroup) {
-					let textValue = this.options.tagValueProcessor(key, item);
+					let textValue = this.options.tagValueProcessor(resolvedKey, item);
 					textValue = this.replaceEntitiesValue(textValue);
 					listTagVal += textValue;
 				} else {
-					matcher.push(key);
+					matcher.push(resolvedKey);
 					const isStopNode = this.checkStopNode(matcher);
 					matcher.pop();
 					if (isStopNode) {
 						const textValue = "" + item;
-						if (textValue === "") listTagVal += this.indentate(level) + "<" + key + this.closeTag(key) + this.tagEndChar;
-						else listTagVal += this.indentate(level) + "<" + key + ">" + textValue + "</" + key + this.tagEndChar;
-					} else listTagVal += this.buildTextValNode(item, key, "", level, matcher);
+						if (textValue === "") listTagVal += this.indentate(level) + "<" + resolvedKey + this.closeTag(resolvedKey) + this.tagEndChar;
+						else listTagVal += this.indentate(level) + "<" + resolvedKey + ">" + textValue + "</" + resolvedKey + this.tagEndChar;
+					} else listTagVal += this.buildTextValNode(item, resolvedKey, "", level, matcher);
 				}
 			}
-			if (this.options.oneListGroup) listTagVal = this.buildObjectNode(listTagVal, key, listTagAttr, level);
+			if (this.options.oneListGroup) listTagVal = this.buildObjectNode(listTagVal, resolvedKey, listTagAttr, level);
 			val += listTagVal;
 		} else if (this.options.attributesGroupName && key === this.options.attributesGroupName) {
 			const Ks = Object.keys(jObj[key]);
 			const L = Ks.length;
-			for (let j = 0; j < L; j++) attrStr += this.buildAttrPairStr(Ks[j], "" + jObj[key][Ks[j]], isCurrentStopNode);
-		} else val += this.processTextOrObjNode(jObj[key], key, level, matcher);
+			for (let j = 0; j < L; j++) {
+				const resolvedAttr = resolveTagName(Ks[j], true, this.options, matcher, xmlVersion);
+				attrStr += this.buildAttrPairStr(resolvedAttr, "" + jObj[key][Ks[j]], isCurrentStopNode);
+			}
+		} else val += this.processTextOrObjNode(jObj[key], resolvedKey, level, matcher, xmlVersion);
 	}
 	return {
 		attrStr,
@@ -18012,9 +18177,9 @@ Builder.prototype.buildAttrPairStr = function(attrName, val, isStopNode) {
 		val = this.replaceEntitiesValue(val);
 	}
 	if (this.options.suppressBooleanAttributes && val === "true") return " " + attrName;
-	else return " " + attrName + "=\"" + val + "\"";
+	else return " " + attrName + "=\"" + escapeAttribute(val) + "\"";
 };
-function processTextOrObjNode(object, key, level, matcher) {
+function processTextOrObjNode(object, key, level, matcher, xmlVersion) {
 	const attrValues = this.extractAttributes(object);
 	matcher.push(key, attrValues);
 	if (this.checkStopNode(matcher)) {
@@ -18023,9 +18188,10 @@ function processTextOrObjNode(object, key, level, matcher) {
 		matcher.pop();
 		return this.buildObjectNode(rawContent, key, attrStr, level);
 	}
-	const result = this.j2x(object, level + 1, matcher);
+	const result = this.j2x(object, level + 1, matcher, xmlVersion);
 	matcher.pop();
-	if (object[this.options.textNodeName] !== void 0 && Object.keys(object).length === 1) return this.buildTextValNode(object[this.options.textNodeName], key, result.attrStr, level, matcher);
+	if (key[0] === "?") return this.buildTextValNode("", key, result.attrStr, level, matcher);
+	else if (object[this.options.textNodeName] !== void 0 && Object.keys(object).length === 1) return this.buildTextValNode(object[this.options.textNodeName], key, result.attrStr, level, matcher);
 	else return this.buildObjectNode(result.val, key, result.attrStr, level);
 }
 Builder.prototype.extractAttributes = function(obj) {
@@ -18037,14 +18203,14 @@ Builder.prototype.extractAttributes = function(obj) {
 		for (let attrKey in attrGroup) {
 			if (!Object.prototype.hasOwnProperty.call(attrGroup, attrKey)) continue;
 			const cleanKey = attrKey.startsWith(this.options.attributeNamePrefix) ? attrKey.substring(this.options.attributeNamePrefix.length) : attrKey;
-			attrValues[cleanKey] = attrGroup[attrKey];
+			attrValues[cleanKey] = escapeAttribute(attrGroup[attrKey]);
 			hasAttrs = true;
 		}
 	} else for (let key in obj) {
 		if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
 		const attr = this.isAttribute(key);
 		if (attr) {
-			attrValues[attr] = obj[key];
+			attrValues[attr] = escapeAttribute(obj[key]);
 			hasAttrs = true;
 		}
 	}
@@ -18104,6 +18270,7 @@ Builder.prototype.buildAttributesForStopNode = function(obj) {
 Builder.prototype.buildObjectNode = function(val, key, attrStr, level) {
 	if (val === "") if (key[0] === "?") return this.indentate(level) + "<" + key + attrStr + "?" + this.tagEndChar;
 	else return this.indentate(level) + "<" + key + attrStr + this.closeTag(key) + this.tagEndChar;
+	else if (key[0] === "?") return this.indentate(level) + "<" + key + attrStr + "?" + this.tagEndChar;
 	else {
 		let tagEndExp = "</" + key + this.tagEndChar;
 		let piClosingChar = "";
@@ -18131,10 +18298,10 @@ Builder.prototype.checkStopNode = function(matcher) {
 };
 Builder.prototype.buildTextValNode = function(val, key, attrStr, level, matcher) {
 	if (this.options.cdataPropName !== false && key === this.options.cdataPropName) {
-		const safeVal = String(val).replace(/\]\]>/g, "]]]]><![CDATA[>");
+		const safeVal = safeCdata(val);
 		return this.indentate(level) + `<![CDATA[${safeVal}]]>` + this.newLine;
 	} else if (this.options.commentPropName !== false && key === this.options.commentPropName) {
-		const safeVal = String(val).replace(/--/g, "- -").replace(/-$/, "- ");
+		const safeVal = safeComment(val);
 		return this.indentate(level) + `<!--${safeVal}-->` + this.newLine;
 	} else if (key[0] === "?") return this.indentate(level) + "<" + key + attrStr + "?" + this.tagEndChar;
 	else {
@@ -64548,6 +64715,7 @@ var require_headers = /* @__PURE__ */ __commonJSMin(((exports) => {
 			uid,
 			gid,
 			size,
+			byteOffset: 0,
 			mtime: /* @__PURE__ */ new Date(1e3 * mtime),
 			type,
 			linkname,
@@ -64678,6 +64846,7 @@ var require_extract$1 = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	var b4a = require_b4a();
 	var headers = require_headers();
 	var EMPTY = b4a.alloc(0);
+	var MAX_HEADER_SIZE = 4 * 1024 * 1024;
 	var BufferList = class {
 		constructor() {
 			this.buffered = 0;
@@ -64690,7 +64859,7 @@ var require_extract$1 = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			this.queue.push(buffer);
 		}
 		shiftFirst(size) {
-			return this._buffered === 0 ? null : this._next(size);
+			return this.buffered === 0 ? null : this._next(size);
 		}
 		shift(size) {
 			if (size > this.buffered) return null;
@@ -64787,6 +64956,7 @@ var require_extract$1 = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 				return false;
 			}
 			if (!this._header) return true;
+			this._header.byteOffset = this._buffer.shifted;
 			switch (this._header.type) {
 				case "gnu-long-path":
 				case "gnu-long-link-path":
@@ -64794,10 +64964,18 @@ var require_extract$1 = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 				case "pax-header":
 					this._longHeader = true;
 					this._missing = this._header.size;
+					if (this._missing > MAX_HEADER_SIZE) {
+						this._continueWrite(/* @__PURE__ */ new Error("Header exceeds max size"));
+						return false;
+					}
 					return true;
 			}
 			this._locked = true;
 			this._applyLongHeaders();
+			if (!(this._header.size >= 0)) {
+				this._continueWrite(/* @__PURE__ */ new Error("Invalid header"));
+				return false;
+			}
 			if (this._header.size === 0 || this._header.type === "directory") {
 				this.emit("entry", this._header, this._createStream(), this._unlockBound);
 				return true;
