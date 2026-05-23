@@ -62313,6 +62313,7 @@ var require_archive_output_stream = /* @__PURE__ */ __commonJSMin(((exports, mod
 //#endregion
 //#region node_modules/crc-32/crc32.js
 var require_crc32 = /* @__PURE__ */ __commonJSMin(((exports) => {
+	/*! crc32.js (C) 2014-present SheetJS -- http://sheetjs.com */
 	(function(factory) {
 		if (typeof DO_NOT_EXPORT_CRC === "undefined") if ("object" === typeof exports) factory(exports);
 		else if ("function" === typeof define && define.amd) define(function() {
@@ -65766,16 +65767,16 @@ var require_json = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	};
 	module.exports = Json;
 }));
+/**
+* Archiver Vending
+*
+* @ignore
+* @license [MIT]{@link https://github.com/archiverjs/node-archiver/blob/master/LICENSE}
+* @copyright (c) 2012-2014 Chris Talkington, contributors.
+*/
 //#endregion
 //#region node_modules/@actions/artifact/lib/internal/upload/stream.js
 var import_archiver = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
-	/**
-	* Archiver Vending
-	*
-	* @ignore
-	* @license [MIT]{@link https://github.com/archiverjs/node-archiver/blob/master/LICENSE}
-	* @copyright (c) 2012-2014 Chris Talkington, contributors.
-	*/
 	var Archiver = require_core();
 	var formats = {};
 	/**
